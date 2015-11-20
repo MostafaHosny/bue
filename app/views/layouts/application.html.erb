@@ -19,19 +19,12 @@
     <![endif]-->
   </head>
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-
-    <h1>Hello, Twitter Bootstrap</h1>
-    <ul class="hmenu">
-  
-<%= render 'shared/navigationbar' %>
-    </ul>
-  
-  <div class='container'>
-    <%= yield %>
-</div>
    
-
+    <ul class="hmenu">
+    <%= render 'shared/navigationbar' %>
+    </ul>
+    <div class='container'>
+      <%= yield %>
+    </div>
   </body>
 </html>

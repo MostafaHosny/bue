@@ -1,26 +1,54 @@
-<h2>Log in</h2>
+<head>
+<link rel="stylesheet" href="/assets/sign_up.css"/>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+</head>
+<div class="container">
+<div class="row centered-form">
+        <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Please Log in with your email </h3>
+            </div>
+            <div class="panel-body">
+            <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                   
+                <div class="form-group">
+                 <%= f.email_field :email, class: "form-control input-sm" , placeholder:"Email Address" %>
+                </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+                <div class="row">
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                    <%= f.password_field :password, autocomplete: "off"  ,class: "form-control input-sm" , placeholder:"Password #{@minimum_password_length} characters" %>
+                    </div>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                     <%= f.check_box :remember_me %>
+                     <%= f.label :remember_me %>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="actions">
+                  <%= f.submit "Log in" , class: "btn btn-primary"%><br/>
+                </div>
 
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+                <div class="form-group">
+                                    <div class="col-md-12 control">
+                                        <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
+                                            Don't have an account! 
+                                         <%= link_to "Sign up now !", new_registration_path(resource_name) , class: "pull-right text-muted" %>
+                                        </div>
+                                    </div>
+                  </div>    
+             <% end %>
+             </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  <% end -%>
 
-  <div class="actions">
-  <%= f.submit "Log in", class: 'btn btn-primary' %>
-</div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+<script type="text/javascript" src="http://www.clubdesign.at/floatlabels.js"></script>
+<script type="text/javascript" src="/assets/floatlabels.js"></script>

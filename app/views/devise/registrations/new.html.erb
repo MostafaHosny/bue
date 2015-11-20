@@ -1,29 +1,70 @@
-<h2>Sign up</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+<head>
+<link rel="stylesheet" href="/assets/sign_up.css"/>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
+</head>
+<div class="container">
+        <div class="row centered-form">
+        <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Please sign up </h3>
+            </div>
+            <div class="panel-body">
+             <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+               <!-- <%= devise_error_messages! %> -->
+              <%if resource.errors.any? %>
+                <div class="alert alert-danger" role="alert">
+                  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                  <span class="sr-only">Error:</span>
+                  <%= resource.errors.full_messages.first %>
+                </div>
+                <%end%>
+                <div class="row">
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                     <%= f.text_field :first_name, autofocus: true , class:"form-control input-sm floatlabel" ,placeholder:"First Name" %>
+                    </div>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <%= f.text_field :last_name , class:"form-control input-sm floatlabel" ,placeholder:"Last Name" %>
+                    </div>
+                  </div>
+                </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+                <div class="form-group">
+                 <%= f.email_field :email, class: "form-control input-sm" , placeholder:"Email Address" %>
+                </div>
 
-<%= render "devise/shared/links" %>
+                <div class="row">
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                    <%= f.password_field :password, autocomplete: "off"  ,class: "form-control input-sm" , placeholder:"Password #{@minimum_password_length} characters" %>
+                    </div>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                     <%= f.password_field :password_confirmation, autocomplete: "off"  ,class: "form-control input-sm" ,placeholder: "Confirm Password" %>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="actions">
+                  <%= f.submit "Register" , class: "btn btn-info btn-block"%><br/>
+                </div>
+             <% end %>
+             <div class="form-group">
+                <%=link_to "Have an account? Log in", new_session_path(resource_name) , class: "btn btn-info btn-block" %>
+             </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<script type="text/javascript" src="http://www.clubdesign.at/floatlabels.js"></script>
+<script type="text/javascript" src="/assets/floatlabels.js"></script>
+
