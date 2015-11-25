@@ -1,34 +1,119 @@
-<p id="notice"><%= notice %></p>
+<head>
+    <script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1','packages':['corechart']}]}"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1.1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      
 
-<h1>Listing Users</h1>
+    var donutRangeSlider = new google.visualization.ControlWrapper({
+    'controlType': 'NumberRangeFilter',
+    'containerId': 'filter_div',
+    'options': {
+      'filterColumnLabel': 'Donuts eaten'
+    }
+  });
 
-<table>
-  <thead>
-    <tr>
-      <th>First name</th>
-      <th>Last name</th>
-      <th>Std</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+ 
+               
 
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.first_name %></td>
-        <td><%= user.last_name %></td>
-        <td><%= user.std_id %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      var options = {
+          legend: 'none',
+          hAxis: { title: 'f(t)', minValue: 0, maxValue: 20 },
+          vAxis: {
+        title: "V(volt)"
+        },
+          colors: ['#3A81BF'],
+          pointSize: 1,
+          pointShape: 'square'
+       };
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable
+            ([['X', 'f(t)'],
+              [0, 1],
+              [2, 1],
+              [2, -1],
+              [4, -1],
+              [4, 0]
+             
+        ]);
+           
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    }
+
+    function changechart(t1,t2,a) {
+
+        var t1 = parseInt(t1)
+        var t2 = parseInt(t2)
+        var a = parseInt(a)
+        var T = t1 + t2
+
+        
+        var data = google.visualization.arrayToDataTable
+             ([['X', 'T'],
+              [0, a],
+              [t1, a],
+              [t1, -a],
+              [t1+t2, -a],
+              [t1+t2, 0]
+            
+        ]);
+
+
+              for (var i = 0; i < 3; i++) {
+                 data.addRows([
+              [T, a],
+              [T+t1, a],
+              [T+t1, -a],
+              [T+t1+t2, -a],
+              [T+t1+t2, 0],
+                  ]);
+                 T = T+t1+t2 ;
+              // more statements
+          }
+        
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    }
+
+    </script>
+  </head>
+  <body>
 
 <br>
+    <div id="chart_div" style="width: 900px; height: 500px;"></div>
+     <div id="filter_div" style="padding-left: 2em; min-width: 250px"></div>
+     
+     <div class="form-group">
+     <label for="T1" class="col-md-3 control-label">T1</label>
+        <div class="col-md-9 range range-primary">
+          <input id="T1" type="range" name="range" min="1" max="10" step="1" value="1" onchange="rangePrimary.value=value;changechart(T1.value,T2.value,A.value);">
+          <output id="rangePrimary">6</output>
+          </div>
+      </div>
+       <div class="form-group">
+     <label for="T2" class="col-md-3 control-label">T2</label>
+        <div class="col-md-9 range range-primary">
+          <input id="T2" type="range" name="range" min="1" max="10" step="1" value="1" onchange="rangePrimary.value=value;changechart(T1.value,T2.value,A.value);">
+          <output id="rangePrimary">6</output>
+          </div>
+      </div>
+      <div class="form-group">
+     <label for="T2" class="col-md-3 control-label">A</label>
+        <div class="col-md-9 range range-primary">
+          <input id="A" type="range" name="range" min="1" max="10" step="1" value="1" onchange="rangePrimary.value=value;changechart(T1.value,T2.value,A.value);">
+          <output id="rangePrimary">6</output>
+          </div>
+      </div>
+  </body>
+</html>
+<p id="notice"><%= notice %></p>
 
 
-<canvas id="mycanvas" width="400" height="100"></canvas>
-<script type="text/javascript" src="\assets\smoothie.js"></script>
+
+
+<!-- <canvas id="mycanvas" width="400" height="100"></canvas> -->
+<!-- <script type="text/javascript" src="\assets\smoothie.js"></script>
 <script type="text/javascript" src="\assets\index.js"></script>
+ -->
