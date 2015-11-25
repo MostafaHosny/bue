@@ -1,19 +1,10 @@
 <head>
+<script type="text/javascript" src="\assets\slider.js"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1','packages':['corechart']}]}"></script>
     <script type="text/javascript">
       google.load("visualization", "1.1", {packages:["corechart"]});
       google.setOnLoadCallback(drawChart);
       
-
-    var donutRangeSlider = new google.visualization.ControlWrapper({
-    'controlType': 'NumberRangeFilter',
-    'containerId': 'filter_div',
-    'options': {
-      'filterColumnLabel': 'Donuts eaten'
-    }
-  });
-
- 
                
 
       var options = {
@@ -27,6 +18,17 @@
           pointShape: 'square'
        };
 
+       var options2 = {
+          legend: 'none',
+          hAxis: { title: 'F', minValue: 0, maxValue: 20 },
+          vAxis: {
+        title: "A(n)"
+        },
+          colors: ['#3A81BF'],
+          pointSize: 20,
+          pointShape: 'square'
+       };
+
       function drawChart() {
         var data = google.visualization.arrayToDataTable
             ([['X', 'f(t)'],
@@ -35,23 +37,31 @@
               [2, -1],
               [4, -1],
               [4, 0]
-             
+        ]);
+            var data2 = google.visualization.arrayToDataTable
+            ([['X', 'F'],
+              [0, 1]
         ]);
            
         var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
         chart.draw(data, options);
+         var chart = new google.visualization.LineChart(document.getElementById('chart_div2'));
+        chart.draw(data2, options2);
     }
 
+        var t1 ;
+        var t2 ;
+        var a ;
+        var T ;
     function changechart(t1,t2,a) {
 
-        var t1 = parseInt(t1)
-        var t2 = parseInt(t2)
-        var a = parseInt(a)
-        var T = t1 + t2
+         t1 = parseInt(t1)
+         t2 = parseInt(t2)
+         a = parseInt(a)
+         T = t1 + t2
 
-        
         var data = google.visualization.arrayToDataTable
-             ([['X', 'T'],
+             ([['X', 'f(t)'],
               [0, a],
               [t1, a],
               [t1, -a],
@@ -77,43 +87,115 @@
         chart.draw(data, options);
     }
 
+    function changef(n) {
+
+        var n = parseInt(n);
+        var a0 = 2*a/Math.PI;
+        var f0 = 1/(t1+t2);
+        var data2 = google.visualization.arrayToDataTable
+             ([['X', 'A'],
+              [0, 0],
+              [0, a0],
+        ]);
+              for (var i = 1; i <= n; i++) {
+                 data2.addRows([
+              [i*f0, 0],
+              [i*f0, 2],
+              [-i*f0, 0],
+              [-i*f0, 2],
+            
+                  ]);
+              // more statements 4*a/(2*n*Math.pi)
+
+          }
+
+        var chart2 = new google.visualization.LineChart(document.getElementById('chart_div2'));
+        chart2.draw(data2, options2);
+        }
+
+    $(document).ready(function(){
+
+    $("#bootstrap-slider-t1").slider();
+    $("#bootstrap-slider-t1").on("slide", function(slideEvt) {
+      changechart(slideEvt.value,5,3)
+    $("#sliderValue").text(slideEvt.value);
+  });
+  
+   $('.slider').on("click", function() {
+
+      var newvalue = $('.tooltip-inner').text();
+      changechart(newvalue,5,3);
+    $("#sliderValue").text(newvalue);
+  });
+
+});
+
     </script>
   </head>
   <body>
 
-<br>
-    <div id="chart_div" style="width: 900px; height: 500px;"></div>
-     <div id="filter_div" style="padding-left: 2em; min-width: 250px"></div>
-     
-     <div class="form-group">
-     <label for="T1" class="col-md-3 control-label">T1</label>
+
+    <div class="container">
+      <div class="row">
+      <div class="col-xs-6">
+        <div id="chart_div" style="width: 600px; height: 500px;"></div>
+
+      </div>
+      <div class="col-xs-6">
+       <div id="chart_div2" style="width: 600px; height: 500px;"></div>
+      </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6">
+        <div class="button-slider">
+          <div class="btn-group">
+          <div class="btn btn-default">T1</div>
+          <div class="btn btn-default">
+          <input id="bootstrap-slider-t1" type="text" data-slider-min="1" data-slider-max="50" data-slider-step="1" data-slider-value="10"/>
+        <div class="valueLabel">T1 is<span id="sliderValue">10</span></div>
+    </div>
+  </div>
+</div>
+       <div class="form-group">    
         <div class="col-md-9 range range-primary">
-          <input id="T1" type="range" name="range" min="1" max="10" step="1" value="1" onchange="rangePrimary.value=value;changechart(T1.value,T2.value,A.value);">
-          <output id="rangePrimary">6</output>
+         <label for="T1" class="control-label">T1</label>
+          <input id="T1" type="range" name="range" min="1" max="100" step="1" value="1" onchange="rangePrimary1.value=value;changechart(T1.value,T2.value,A.value);">
+          <output id="rangePrimary1">6</output>
           </div>
       </div>
        <div class="form-group">
-     <label for="T2" class="col-md-3 control-label">T2</label>
         <div class="col-md-9 range range-primary">
-          <input id="T2" type="range" name="range" min="1" max="10" step="1" value="1" onchange="rangePrimary.value=value;changechart(T1.value,T2.value,A.value);">
-          <output id="rangePrimary">6</output>
+        <label for="T2" class="control-label">T2</label>
+          <input id="T2" type="range" name="range" min="1" max="100" step="1" value="1" onchange="rangePrimary2.value=value;changechart(T1.value,T2.value,A.value);">
+          <output id="rangePrimary2">6</output>
           </div>
       </div>
       <div class="form-group">
-     <label for="T2" class="col-md-3 control-label">A</label>
         <div class="col-md-9 range range-primary">
-          <input id="A" type="range" name="range" min="1" max="10" step="1" value="1" onchange="rangePrimary.value=value;changechart(T1.value,T2.value,A.value);">
-          <output id="rangePrimary">6</output>
+         <label for="T2" class=" control-label">A</label>
+          <input id="A" type="range" name="range" min="1" max="100" step="1" value="1" onchange="rangePrimary3.value=value;changechart(T1.value,T2.value,A.value);">
+          <output id="rangePrimary3">6</output>
           </div>
       </div>
+        </div>
+        <div class="col-xs-6">
+          <div class="form-group">
+        <div class="col-md-9 range range-primary">
+        <label for="N" class="col-md-3 control-label">N</label>
+          <input id="N" type="range" name="range" min="1" max="100" step="1" value="3" onchange="rangePrimaryN.value=value;changef(N.value);">
+           <output id="rangePrimaryN">6</output>
+          </div>
+      </div>
+        </div>
+      </div>
+</div>
+    
   </body>
 </html>
 <p id="notice"><%= notice %></p>
 
 
-
-
-<!-- <canvas id="mycanvas" width="400" height="100"></canvas> -->
+<!-- <canvas id="mycanvas" width="400" height="100"></canvas>
 <!-- <script type="text/javascript" src="\assets\smoothie.js"></script>
 <script type="text/javascript" src="\assets\index.js"></script>
  -->
