@@ -6,7 +6,10 @@
       google.setOnLoadCallback(drawChart);
       
                
-
+        var t1 ;
+        var t2 ;
+        var a ;
+        var T ;
       var options = {
           legend: 'none',
           hAxis: { title: 'f(t)', minValue: 0, maxValue: 20 },
@@ -19,14 +22,14 @@
        };
 
        var options2 = {
-          legend: 'none',
-          hAxis: { title: 'F', minValue: 0, maxValue: 20 },
+
+          hAxis: { title: 'F', minValue: -.0001, maxValue: .0001 ,gridlines: {color: 'transparent'}},
           vAxis: {
-        title: "A(n)"
+        title: "A(n)" , minValue: -1, maxValue: 1 
+
         },
-          colors: ['#3A81BF'],
-          pointSize: 20,
-          pointShape: 'square'
+          colors: ['#C10B0B'],
+          lineWidth: 3
        };
 
       function drawChart() {
@@ -40,19 +43,18 @@
         ]);
             var data2 = google.visualization.arrayToDataTable
             ([['X', 'F'],
-              [0, 1]
+              [0, 0],
+              [0, 6]
         ]);
            
         var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
         chart.draw(data, options);
-         var chart = new google.visualization.LineChart(document.getElementById('chart_div2'));
-        chart.draw(data2, options2);
+
+         var chart2 = new google.visualization.ColumnChart(document.getElementById('chart_div2'));
+        chart2.draw(data2, options2);
     }
 
-        var t1 ;
-        var t2 ;
-        var a ;
-        var T ;
+       
     function changechart(t1,t2,a) {
 
          t1 = parseInt(t1)
@@ -87,45 +89,65 @@
         chart.draw(data, options);
     }
 
-    function changef(n) {
+    function changef(t1,t2,a,n) {
 
         var n = parseInt(n);
-        var a0 = 2*a/Math.PI;
-        var f0 = 1/(t1+t2);
+        var ano = (2*a)/Math.PI;
+        var fno = 1/(t1+t2);
         var data2 = google.visualization.arrayToDataTable
-             ([['X', 'A'],
+             ([['X', 'F'],
               [0, 0],
-              [0, a0],
-        ]);
+              [0, ano],
+         ]);
+
               for (var i = 1; i <= n; i++) {
-                 data2.addRows([
-              [i*f0, 0],
-              [i*f0, 2],
-              [-i*f0, 0],
-              [-i*f0, 2],
+            data2.addRows([
+              [i*fno, 4*a/(2*i+1)*Math.PI],
+              [i*fno, 4*a/(2*i+1)*Math.PI],
+              [-i*fno, 4*a/(2*i+1)*Math.PI],
+              [-i*fno, 4*a/(2*i+1)*Math.PI],
             
                   ]);
-              // more statements 4*a/(2*n*Math.pi)
+              //more statements 4*a/(2*n*Math.pi)
 
-          }
+         }
 
-        var chart2 = new google.visualization.LineChart(document.getElementById('chart_div2'));
+       var chart2 = new google.visualization.ColumnChart(document.getElementById('chart_div2'));
         chart2.draw(data2, options2);
         }
 
     $(document).ready(function(){
 
     $("#bootstrap-slider-t1").slider();
+    $("#bootstrap-slider-t2").slider();
+    $("#bootstrap-slider-A").slider();
+    $("#bootstrap-slider-N").slider();
+    
     $("#bootstrap-slider-t1").on("slide", function(slideEvt) {
-      changechart(slideEvt.value,5,3)
-    $("#sliderValue").text(slideEvt.value);
+      changechart(slideEvt.value,$('#bootstrap-slider-t2').val(),$('#bootstrap-slider-A').val())
+    $("#sliderValue-t1").text(slideEvt.value);
+  });
+    $("#bootstrap-slider-t2").on("slide", function(slideEvt) {
+      changechart($('#bootstrap-slider-t1').val(),slideEvt.value,$('#bootstrap-slider-A').val())
+    $("#sliderValue-t2").text(slideEvt.value);
+  });
+    $("#bootstrap-slider-A").on("slide", function(slideEvt) {
+      changechart($('#bootstrap-slider-A').val(),$('#bootstrap-slider-t2').val(),slideEvt.value)
+    $("#sliderValue-A").text(slideEvt.value);
+  });
+    $("#bootstrap-slider-N").on("slide", function(slideEvt) {
+      changef($('#bootstrap-slider-t1').val(),$('#bootstrap-slider-t2').val(),$('#bootstrap-slider-A').val(),slideEvt.value);
+      
+    $("#sliderValue-N").text(slideEvt.value);
   });
   
    $('.slider').on("click", function() {
-
-      var newvalue = $('.tooltip-inner').text();
-      changechart(newvalue,5,3);
-    $("#sliderValue").text(newvalue);
+      // var newvalue = $('.tooltip-inner').text();
+      changechart($('#bootstrap-slider-t1').val(),$('#bootstrap-slider-t2').val(),$('#bootstrap-slider-A').val())
+    $("#sliderValue-t1").text($('#bootstrap-slider-t1').val());
+    $("#sliderValue-t2").text($('#bootstrap-slider-t2').val());
+    $("#sliderValue-A").text($('#bootstrap-slider-A').val());
+    $("#sliderValue-N").text($('#bootstrap-slider-N').val());
   });
 
 });
@@ -147,45 +169,52 @@
       </div>
       <div class="row">
         <div class="col-xs-6">
+        
         <div class="button-slider">
           <div class="btn-group">
           <div class="btn btn-default">T1</div>
           <div class="btn btn-default">
           <input id="bootstrap-slider-t1" type="text" data-slider-min="1" data-slider-max="50" data-slider-step="1" data-slider-value="10"/>
-        <div class="valueLabel">T1 is<span id="sliderValue">10</span></div>
-    </div>
-  </div>
-</div>
-       <div class="form-group">    
-        <div class="col-md-9 range range-primary">
-         <label for="T1" class="control-label">T1</label>
-          <input id="T1" type="range" name="range" min="1" max="100" step="1" value="1" onchange="rangePrimary1.value=value;changechart(T1.value,T2.value,A.value);">
-          <output id="rangePrimary1">6</output>
+          <div class="valueLabel">T1 is<span id="sliderValue-t1">10</span></div>
           </div>
-      </div>
-       <div class="form-group">
-        <div class="col-md-9 range range-primary">
-        <label for="T2" class="control-label">T2</label>
-          <input id="T2" type="range" name="range" min="1" max="100" step="1" value="1" onchange="rangePrimary2.value=value;changechart(T1.value,T2.value,A.value);">
-          <output id="rangePrimary2">6</output>
           </div>
-      </div>
-      <div class="form-group">
-        <div class="col-md-9 range range-primary">
-         <label for="T2" class=" control-label">A</label>
-          <input id="A" type="range" name="range" min="1" max="100" step="1" value="1" onchange="rangePrimary3.value=value;changechart(T1.value,T2.value,A.value);">
-          <output id="rangePrimary3">6</output>
-          </div>
-      </div>
         </div>
-        <div class="col-xs-6">
-          <div class="form-group">
-        <div class="col-md-9 range range-primary">
-        <label for="N" class="col-md-3 control-label">N</label>
-          <input id="N" type="range" name="range" min="1" max="100" step="1" value="3" onchange="rangePrimaryN.value=value;changef(N.value);">
-           <output id="rangePrimaryN">6</output>
+        <br></br>
+ 
+       <div class="button-slider">
+            <div class="btn-group">
+            <div class="btn btn-default">T2</div>
+            <div class="btn btn-default">
+            <input id="bootstrap-slider-t2" type="text" data-slider-min="1" data-slider-max="50" data-slider-step="1" data-slider-value="10"/>
+            <div class="valueLabel">T2 is<span id="sliderValue-t2">10</span></div>
           </div>
+         </div>
+     </div>
+    <br></br>
+
+        
+          <div class="button-slider">
+          <div class="btn-group">
+          <div class="btn btn-default">A</div>
+          <div class="btn btn-default">
+            <input id="bootstrap-slider-A" type="text" data-slider-min="1" data-slider-max="50" data-slider-step="1" data-slider-value="10"/>
+            <div class="valueLabel">A is<span id="sliderValue-A">10</span></div>
+          </div>
+          </div>
+          </div>
+          </div>
+        <br></br>
+
+        <div class="col-xs-6">
+          <div class="button-slider">
+          <div class="btn-group">
+          <div class="btn btn-default">N</div>
+          <div class="btn btn-default">
+          <input id="bootstrap-slider-N" type="text" data-slider-min="1" data-slider-max="50" data-slider-step="1" data-slider-value="10"/>
+          <div class="valueLabel-N">N is<span id="sliderValue">10</span></div>
+        </div>
       </div>
+    </div>
         </div>
       </div>
 </div>
