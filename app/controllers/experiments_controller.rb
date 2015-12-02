@@ -1,5 +1,5 @@
 class ExperimentsController < ApplicationController
-  before_action :set_experiment, only: [:show, :edit, :update, :destroy]
+   # before_action :set_experiment, only: [:show, :edit, :update, :destroy]
 
   # GET /experiments
   # GET /experiments.json
@@ -10,6 +10,7 @@ class ExperimentsController < ApplicationController
   # GET /experiments/1
   # GET /experiments/1.json
   def show
+     render "first"
   end
 
   # GET /experiments/new
@@ -19,6 +20,11 @@ class ExperimentsController < ApplicationController
 
   # GET /experiments/1/edit
   def edit
+  end
+
+   # expirment 1
+  def first
+
   end
 
   # POST /experiments
