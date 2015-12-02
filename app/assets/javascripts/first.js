@@ -7,7 +7,7 @@
         var T ;
       var options = {
           legend: 'none',
-          hAxis: { title: 'f(t)', minValue: 0, maxValue: 20 },
+          hAxis: { title: 'f(t)' },
           vAxis: {
         title: "V(volt)"
         },
@@ -19,9 +19,9 @@
 
        var options2 = {
 
-          hAxis: { title: 'F', minValue: -.0001, maxValue: .0001 ,gridlines: {color: 'transparent'}},
+          hAxis: { title: 'F' ,gridlines: {color: 'transparent'}},
           vAxis: {
-        title: "A(n)" , minValue: -1, maxValue: 1 
+        title: "A(n)" 
 
         },
          explorer: { actions: ['dragToPan', 'rightClickToReset'] },
@@ -89,7 +89,7 @@
     function changef(t1,t2,a,n) {
 
         var n = parseInt(n);
-        var ano = (2*a)/Math.PI;
+        var ano = Math.abs(a*(t1-t2)/(t1+t2));
         var fno = 1/(t1+t2);
         var data2 = google.visualization.arrayToDataTable
              ([['X', 'A(n)'],
@@ -99,10 +99,10 @@
 
               for (var i = 1; i <= n; i++) {
             data2.addRows([
-              [i*fno, 4*a/(2*i+1)*Math.PI],
-              [i*fno, 4*a/(2*i+1)*Math.PI],
-              [-i*fno, 4*a/(2*i+1)*Math.PI],
-              [-i*fno, 4*a/(2*i+1)*Math.PI],
+              [i*fno, 2*a/i*fno*Math.PI],
+              [i*fno, 2*a/i*fno*Math.PI],
+              [-i*fno, 2*a/i*fno*Math.PI],
+              [-i*fno, 2*a/i*fno*Math.PI],
             
                   ]);
               //more statements 4*a/(2*n*Math.pi)
@@ -151,3 +151,5 @@
   });
 
 });
+
+
