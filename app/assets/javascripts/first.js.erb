@@ -155,31 +155,11 @@
         }
 
     $(document).ready(function(){
-      var activeDivAttr;
+
 
 //remove this if you can set id attr for each div and then
 //modify the code below to use id attr
-$('div').each (function (index) {
-    $(this).attr('divID', 'divID'+index);    
-});
 
-
-$('div').mousedown(function(e) {
-    e.stopImmediatePropagation(); //stops event bubbling    
-    
-    
-    if (activeDivAttr == $(this).attr('divID')) {
-        this.focus();
-    } else {
-        e.preventDefault();  //stops default browser action (focus)
-    }
-    
-    activeDivAttr= $(this).attr('divID');
-}).focus(function() {
-    activeDivAttr= $(this).attr('divID');
-}).blur(function() {
-    activeDivAttr= '';
-});
     changechart($('#bootstrap-slider-t1').val(),$('#bootstrap-slider-t2').val(),$('#bootstrap-slider-A').val())
     changef($('#bootstrap-slider-t1').val(),$('#bootstrap-slider-t2').val(),$('#bootstrap-slider-A').val(),$('#bootstrap-slider-N').val())
     $("#bootstrap-slider-t1").slider();
@@ -188,33 +168,38 @@ $('div').mousedown(function(e) {
     $("#bootstrap-slider-N").slider();
     
     $("#bootstrap-slider-t1").on("slide", function(slideEvt) {
-       slideEvt.stopPropagation();
+       var tempScrollTop = $(window).scrollTop();
       changechart(slideEvt.value,$('#bootstrap-slider-t2').val(),$('#bootstrap-slider-A').val())
       changef(slideEvt.value,$('#bootstrap-slider-t2').val(),$('#bootstrap-slider-A').val(),$('#bootstrap-slider-N').val());
     $("#sliderValue-t1").text(slideEvt.value);
+    $(window).scrollTop(tempScrollTop);
   });
     $("#bootstrap-slider-t2").on("slide", function(slideEvt) {
-      slideEvt.stopPropagation();
+     var tempScrollTop = $(window).scrollTop();
       changechart($('#bootstrap-slider-t1').val(),slideEvt.value,$('#bootstrap-slider-A').val())
       changef($('#bootstrap-slider-t1').val(),slideEvt.value,$('#bootstrap-slider-A').val(),$('#bootstrap-slider-N').val());
     $("#sliderValue-t2").text(slideEvt.value);
+    $(window).scrollTop(tempScrollTop);
   });
     $("#bootstrap-slider-A").on("slide", function(slideEvt) {
-      slideEvt.stopPropagation();
+     var tempScrollTop = $(window).scrollTop();
       changechart($('#bootstrap-slider-t1').val(),$('#bootstrap-slider-t2').val(),slideEvt.value)
       changef($('#bootstrap-slider-t1').val(),$('#bootstrap-slider-t2').val(),slideEvt.value,$('#bootstrap-slider-N').val());
     $("#sliderValue-A").text(slideEvt.value);
+    $(window).scrollTop(tempScrollTop);
   });
     $("#bootstrap-slider-N").on("slide", function(slideEvt) {
-      slideEvt.stopPropagation();
+     var tempScrollTop = $(window).scrollTop();
       changef($('#bootstrap-slider-t1').val(),$('#bootstrap-slider-t2').val(),$('#bootstrap-slider-A').val(),slideEvt.value);
       
     $("#sliderValue-N").text(slideEvt.value);
+    $(window).scrollTop(tempScrollTop);
   });
   
    $('.slider').on("click", function(event) {
-    event.stopPropagation();
-    event.preventDefault();
+
+     var tempScrollTop = $(window).scrollTop();
+     // event.preventDefault();
       // var newvalue = $('.tooltip-inner').text();
        changechart($('#bootstrap-slider-t1').val(),$('#bootstrap-slider-t2').val(),$('#bootstrap-slider-A').val())
      changef($('#bootstrap-slider-t1').val(),$('#bootstrap-slider-t2').val(),$('#bootstrap-slider-A').val(),$('#bootstrap-slider-N').val())
@@ -222,8 +207,10 @@ $('div').mousedown(function(e) {
     $("#sliderValue-t2").text($('#bootstrap-slider-t2').val());
     $("#sliderValue-A").text($('#bootstrap-slider-A').val());
     $("#sliderValue-N").text($('#bootstrap-slider-N').val());
-  });
 
+    $(window).scrollTop(tempScrollTop);
+  });
+  
 });
 
 
