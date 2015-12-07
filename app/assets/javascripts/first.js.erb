@@ -3,11 +3,25 @@
         var options = {
               chart: {
               renderTo: 'chart_div',
-              type: 'spline'
+              type: 'spline',
+               backgroundColor: "black"
+
                 },
+                credits: {
+            enabled: false
+        },
                 series: [{
+                  showInLegend: false,
+                  animation: false,
                    name: "A",
-                   data:[]
+                   data:[],
+                  color: 'blue',
+                  shadow: {
+                        color: 'blue',
+                        width: 10,
+                        offsetX: 0,
+                        offsetY: 0
+                    }
                 }],
                 title: {
             text: 'Time domain',
@@ -31,11 +45,20 @@
        var options2 = {
               chart: {
               renderTo: 'chart_div2',
-              type: 'column'
+              type: 'column',
+               backgroundColor: "black"
+
                 },
+                 credits: {
+            enabled: false
+        },
                 series: [{
+                   showInLegend: false,
+                  animation: false,
                    name: "A(N)" ,
-                   data:[]
+                   data:[] ,
+                    color: 'blue'
+                  
                 }],
                 title: {
             text: 'Amplitude',
@@ -58,11 +81,18 @@
        var options3 = {
               chart: {
               renderTo: 'chart3',
-              type: 'column'
+              type: 'column' ,
+               backgroundColor: "black"
                 },
+                 credits: {
+            enabled: false
+        },
                 series: [{
+                   showInLegend: false,
                    name: "F Hz",
-                   data:[]
+                   data:[],
+                    color: 'blue'
+                  
                 }],
                 title: {
             text: 'Phase',
@@ -154,14 +184,20 @@
             }
         }
 
+    
     $(document).ready(function(){
-
+ 
+ $('#select_chart').on('change', function() {
+  alert( this.value );
+})
 
 //remove this if you can set id attr for each div and then
 //modify the code below to use id attr
 
     changechart($('#bootstrap-slider-t1').val(),$('#bootstrap-slider-t2').val(),$('#bootstrap-slider-A').val())
     changef($('#bootstrap-slider-t1').val(),$('#bootstrap-slider-t2').val(),$('#bootstrap-slider-A').val(),$('#bootstrap-slider-N').val())
+    
+
     $("#bootstrap-slider-t1").slider();
     $("#bootstrap-slider-t2").slider();
     $("#bootstrap-slider-A").slider();
@@ -175,7 +211,7 @@
     $(window).scrollTop(tempScrollTop);
   });
     $("#bootstrap-slider-t2").on("slide", function(slideEvt) {
-     var tempScrollTop = $(window).scrollTop();
+     // var tempScrollTop = $(window).scrollTop();
       changechart($('#bootstrap-slider-t1').val(),slideEvt.value,$('#bootstrap-slider-A').val())
       changef($('#bootstrap-slider-t1').val(),slideEvt.value,$('#bootstrap-slider-A').val(),$('#bootstrap-slider-N').val());
     $("#sliderValue-t2").text(slideEvt.value);
@@ -210,7 +246,27 @@
 
     $(window).scrollTop(tempScrollTop);
   });
-  
+
+    var vert = document.querySelector('.js-vertical');
+    var initVert = new Powerange(vert, {callback: displayValue1 ,vertical: true ,hideRange: true ,start: 10 ,min: 1, max: 50 });
+
+function displayValue1() {
+      document.getElementById('js-display-v').innerHTML = vert.value;
+      changechart(vert.value,$('#bootstrap-slider-t2').val(),vert.value)
+      changef(vert.value,$('#bootstrap-slider-t2').val(),$('#bootstrap-slider-A').val(),$('#bootstrap-slider-N').val());
+
+    }
+      // Callback.
+    var clbk = document.querySelector('.js-callback');
+    var initClbk = new Powerange(clbk, { callback: displayValue, start: 10 ,min: 1, max: 50 });
+
+    function displayValue() {
+      document.getElementById('js-display-callback').innerHTML = clbk.value;
+      changechart(clbk.value,$('#bootstrap-slider-t2').val(),$('#bootstrap-slider-A').val())
+      changef(clbk.value,$('#bootstrap-slider-t2').val(),$('#bootstrap-slider-A').val(),$('#bootstrap-slider-N').val());
+
+    }
+
 });
 
 

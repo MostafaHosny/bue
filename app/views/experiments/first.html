@@ -1,25 +1,44 @@
 
- <link rel="stylesheet" type="text/css" href="\assets\first.css.erb">
-<script type="text/javascript" src="\assets\slider.js.erb"></script>
+<!-- <link rel="stylesheet" type="text/css" href="\assets\first.css.erb">
+<script type="text/javascript" src="\assets\slider.js.erb"></script> -->
+<link rel="stylesheet" type="text/css" href="\assets\powerange.css">
 <script src="http://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
-<script type="text/javascript" src="\assets\first.js.erb"></script>
+<!-- <script type="text/javascript" src="\assets\first.js.erb"></script> -->
 
 <!-- <canvas id="mycanvas" width="400" height="100"></canvas>
-<!-- <script type="text/javascript" src="\assets\smoothie.js"></script>
+<! <script type="text/javascript" src="\assets\smoothie.js"></script>
 <script type="text/javascript" src="\assets\index.js"></script>
  -->
  <div class="container">
     <div class="page-header">
         <h1 id="timeline">Fourier transform </h1>
+        
     </div>
     <ul class="timeline">
         <li>
           <div class="timeline-panel">
             <div class="timeline-heading">
-              <div id="chart_div" ></div>
+                <div class="row">
+                  <div class="col-xs-2">
+                        <div class="slider-wrapper vertical-wrapper">
+                        <input type="text" class="js-vertical" />
+                        <label class="display-box-label-v">(A):</label>
+                        <div id="js-display-v" class="display-box-v"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-xs-10">
+                      <div id="chart_div" ></div>
+                    </div> 
+             </div>
             </div>
             <div class="timeline-body">
+             <div class="slider-wrapper">
+            <input type="text" class="js-callback" />
+            <label class="display-box-label">T1(s):</label>
+            <div id="js-display-callback" class="display-box"></div>
+            </div>
                 <div class="button-slider" style="margin-bottom: 3%;">
                     <div class="btn-group">
                           <div class="btn btn-default">T1</div>
@@ -52,9 +71,18 @@
 
             </div>
           </div>
+          <div class="timeline-panel" style="margin-left: 2%;">
+            <div class="timeline-heading">
+               <select class="btn btn-info" id="select_chart"  >
+                  <option value="1">Squre</option>
+                  <option value="2">Tri</option>
+                </select>
+            </div>
+            <div class="timeline-body">
+            </div>
+          </div>
         </li>
         <li >
-         
           <div class="timeline-panel">
             <div class="timeline-heading">
                <div id="chart_div2" ></div>
@@ -78,12 +106,16 @@
             <div class="timeline-body">
             </div>
           </div>
-        </li>
-
-      
-       
+        </li>    
+        <li >
+          <div class="timeline-panel" style="margin-left: 2%;">
+            <div class="timeline-heading">
+             
+            </div>
+            <div class="timeline-body">
+            </div>
+          </div>
+        </li>    
     </ul>
 </div>
 
-
-/
