@@ -4,12 +4,20 @@
               chart: {
               renderTo: 'chart_div',
               type: 'spline',
-               backgroundColor: "black"
+               
 
                 },
+                tooltip: { enabled: false },
                 credits: {
             enabled: false
         },
+            plotOptions: {
+              line: {
+                  marker: {
+                      enabled: false
+                  }
+              }
+               },
                 series: [{
                   showInLegend: false,
                   animation: false,
@@ -18,44 +26,66 @@
                   color: 'blue',
                   shadow: {
                         color: 'blue',
-                        width: 10,
+                        width: 5,
                         offsetX: 0,
                         offsetY: 0
                     }
                 }],
                 title: {
             text: 'Time domain',
+            style:{
+                        color:'blue'
+                    }
               },
             xAxis: {
+
+              gridLineWidth: 1,
+              ordinal: false,
+              max:40,
+              min:0,
             title: {
-                text: 'F(n)'
-            }
+                text: 'T(sec)'
+
+            },
+            style:{
+                        color:'blue'
+                    }
               },
             yAxis: {
+              gridLineWidth: 1,
+              ordinal: false,
+              max:20,
+              min:-20 ,
             
             title: {
-                text: 'A'
+                text: 'A' ,
+                style:{
+                        color:'blue'
+                    }
             }
+
           }
 
             };
-      
-
-
+       
+       var max = 1;
        var options2 = {
               chart: {
               renderTo: 'chart_div2',
               type: 'column',
-               backgroundColor: "black"
+              
 
                 },
                  credits: {
             enabled: false
         },
+       // var max = 20*1/parseInt($('.js-t1').val())+ parseInt($('.js-t2').val());
                 series: [{
+                  borderWidth: 0,
+                  pointWidth: 1,
                    showInLegend: false,
                   animation: false,
-                   name: "A(N)" ,
+                   name: "C(N)" ,
                    data:[] ,
                     color: 'blue'
                   
@@ -64,14 +94,22 @@
             text: 'Amplitude',
               },
             xAxis: {
+              gridLineWidth: .5,
+              ordinal: false,
+              max:max,
+              min:-max,
+             
             title: {
                 text: 'F hz'
             }
               },
             yAxis: {
-            
+              gridLineWidth: .5,
+              ordinal: false,
+              max:20,
+              min:0,
             title: {
-                text: 'A(n)'
+                text: 'C(N)'
             }
           }
 
@@ -82,14 +120,18 @@
               chart: {
               renderTo: 'chart3',
               type: 'column' ,
-               backgroundColor: "black"
+              
                 },
                  credits: {
             enabled: false
         },
                 series: [{
+
+                  animation: false,
+                   borderWidth: 0,
+                   pointWidth: 1,
                    showInLegend: false,
-                   name: "F Hz",
+                   name: "Phase(N)",
                    data:[],
                     color: 'blue'
                   
@@ -97,6 +139,25 @@
                 title: {
             text: 'Phase',
               },
+              xAxis: {
+              gridLineWidth: .5,
+              ordinal: false,
+              max:max,
+              min:-max,
+             
+            title: {
+                text: 'phase(N)'
+            }
+              },
+            yAxis: {
+              gridLineWidth: .5,
+              ordinal: false,
+              max:90,
+              min:-90,
+            title: {
+                text: 'C(n)'
+            }
+          }
                 
             };
 
@@ -117,7 +178,7 @@
               [t1+t2, 0]]
 
 
-              for (var i = 0; i < 3; i++) {
+              for (var i = 0; i < 20; i++) {
                  data.push(
               [T, a],
               [T+t1, a],
@@ -134,7 +195,7 @@
         // chart.draw(data, options);
     }
 
-    function changef(t1,t2,a,n) {
+    function changef(t1,t2,a,n,max) {
          t1 = parseInt(t1)
          t2 = parseInt(t2)
          a = parseInt(a)
@@ -167,10 +228,13 @@
         
 
           
-
+       options2.xAxis.max = max
+       options2.xAxis.min = -max
        options2.series[0].data = data2;
   var chart2 = new Highcharts.Chart(options2);
-
+ 
+     options3.xAxis.max = max
+     options3.xAxis.min = -max
   options3.series[0].data = data3;
   var chart3 = new Highcharts.Chart(options3);
         }
@@ -191,13 +255,16 @@
   alert( this.value );
 })
 
+
 //remove this if you can set id attr for each div and then
 //modify the code below to use id attr
-
-    changechart($('#bootstrap-slider-t1').val(),$('#bootstrap-slider-t2').val(),$('#bootstrap-slider-A').val())
-    changef($('#bootstrap-slider-t1').val(),$('#bootstrap-slider-t2').val(),$('#bootstrap-slider-A').val(),$('#bootstrap-slider-N').val())
+  max = 20*1/(parseInt($('.js-t1').val())+ parseInt($('.js-t2').val()));
+    // changechart($('#bootstrap-slider-t1').val(),$('#bootstrap-slider-t2').val(),vert.value)
+    // changef($('#bootstrap-slider-t1').val(),$('#bootstrap-slider-t2').val(),$('#bootstrap-slider-A').val(),$('#bootstrap-slider-N').val())
     
-
+      changechart($('.js-t1').val(),$('.js-t2').val(),$('.js-A').val())
+      changef($('.js-t1').val(),$('.js-t2').val(),$('.js-A').val(),$('.js-N').val());
+  document.getElementById('js-display-total').innerHTML = parseInt($('.js-t1').val())+ parseInt($('.js-t2').val());
     $("#bootstrap-slider-t1").slider();
     $("#bootstrap-slider-t2").slider();
     $("#bootstrap-slider-A").slider();
@@ -247,24 +314,50 @@
     $(window).scrollTop(tempScrollTop);
   });
 
-    var vert = document.querySelector('.js-vertical');
-    var initVert = new Powerange(vert, {callback: displayValue1 ,vertical: true ,hideRange: true ,start: 10 ,min: 1, max: 50 });
+    var vert = document.querySelector('.js-A');
+    var initVert = new Powerange(vert, {callback: displayValueA ,vertical: true ,hideRange: true ,start: 10 ,min: 1, max: 20 });
 
-function displayValue1() {
-      document.getElementById('js-display-v').innerHTML = vert.value;
-      changechart(vert.value,$('#bootstrap-slider-t2').val(),vert.value)
-      changef(vert.value,$('#bootstrap-slider-t2').val(),$('#bootstrap-slider-A').val(),$('#bootstrap-slider-N').val());
+function displayValueA() {
+      document.getElementById('js-display-A').innerHTML = vert.value;
+      changechart($('.js-t1').val(),$('.js-t2').val(),vert.value)
+       max = 20*1/(parseInt($('.js-t1').val())+ parseInt($('.js-t2').val()));
+      changef($('.js-t1').val(),$('.js-t2').val(),vert.value,$('.js-N').val(),max);
 
     }
       // Callback.
-    var clbk = document.querySelector('.js-callback');
-    var initClbk = new Powerange(clbk, { callback: displayValue, start: 10 ,min: 1, max: 50 });
+    var clbkt1 = document.querySelector('.js-t1');
+    var initClbk = new Powerange(clbkt1, { callback: displayValuet1, start: 10 ,min: 1, max: 20 });
 
-    function displayValue() {
-      document.getElementById('js-display-callback').innerHTML = clbk.value;
-      changechart(clbk.value,$('#bootstrap-slider-t2').val(),$('#bootstrap-slider-A').val())
-      changef(clbk.value,$('#bootstrap-slider-t2').val(),$('#bootstrap-slider-A').val(),$('#bootstrap-slider-N').val());
+    function displayValuet1() {
+      document.getElementById('js-display-t1').innerHTML = clbkt1.value;
+      document.getElementById('js-display-total').innerHTML = parseInt($('.js-t1').val())+ parseInt($('.js-t2').val());
+      changechart(clbkt1.value,$('.js-t2').val(),$('.js-A').val())
+       max = 20*1/(parseInt($('.js-t1').val())+ parseInt($('.js-t2').val()));
+      changef(clbkt1.value, $('.js-t2').val(), $('.js-A').val(), $('.js-N').val(),max);
 
+    }
+
+    var clbkt2 = document.querySelector('.js-t2');
+    var initClbk = new Powerange(clbkt2, { callback: displayValuet2, start: 10 ,min: 1, max: 20 });
+
+    function displayValuet2() {
+      document.getElementById('js-display-t2').innerHTML = clbkt2.value;
+      document.getElementById('js-display-total').innerHTML = parseInt($('.js-t1').val())+ parseInt($('.js-t2').val());
+      changechart($('.js-t1').val(), clbkt2.value,$('.js-A').val())
+      max = 20*1/(parseInt($('.js-t1').val())+ parseInt($('.js-t2').val()));
+      changef($('.js-t1').val(), clbkt2.value, $('.js-A').val(), $('.js-N').val(),max);
+
+    }
+
+    var clbkN = document.querySelector('.js-N');
+    var initClbk = new Powerange(clbkN, { callback: displayValueN, start: 10 ,min: 1, max: 20 });
+
+    function displayValueN() {
+      document.getElementById('js-display-N').innerHTML = clbkN.value;
+     // changechart($('.js-t1').val(), clbkt2.value,$('.js-A').val())
+      max = 20*1/(parseInt($('.js-t1').val())+ parseInt($('.js-t2').val()));
+     changef($('.js-t1').val(), $('.js-t2').val(), $('.js-A').val(),clbkN.value , max);
+    
     }
 
 });

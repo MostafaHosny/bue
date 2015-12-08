@@ -22,9 +22,9 @@
                 <div class="row">
                   <div class="col-xs-2">
                         <div class="slider-wrapper vertical-wrapper">
-                        <input type="text" class="js-vertical" />
-                        <label class="display-box-label-v">(A):</label>
-                        <div id="js-display-v" class="display-box-v"></div>
+                        <input type="text" class="js-A" />
+                        <label class="display-box-label">(A):</label>
+                        <div id="js-display-A" class="display-box-v"></div>
                         </div>
                     </div>
                     
@@ -35,11 +35,23 @@
             </div>
             <div class="timeline-body">
              <div class="slider-wrapper">
-            <input type="text" class="js-callback" />
-            <label class="display-box-label">T1(s):</label>
-            <div id="js-display-callback" class="display-box"></div>
+            <input type="text" class="js-t1" />
+            <label class="display-box-label">T1(sec):</label>
+            <div id="js-display-t1" class="display-box"></div>
             </div>
-                <div class="button-slider" style="margin-bottom: 3%;">
+
+            <div class="slider-wrapper">
+                <input type="text" class="js-t2" />
+                <label class="display-box-label">T2(sec):</label>
+                <div id="js-display-t2" class="display-box"></div>
+            </div>
+
+            <div class="slider-wrapper">
+                <label class="display-box-label">T(sec):</label>
+                <div id="js-display-total" class="display-box"></div>
+            </div>
+
+               <!--  <div class="button-slider" style="margin-bottom: 3%;">
                     <div class="btn-group">
                           <div class="btn btn-default">T1</div>
                           <div class="btn btn-default">
@@ -47,9 +59,9 @@
                           <div class="valueLabel">T1 is<span id="sliderValue-t1">3</span></div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             
-            <div class="button-slider" style="margin-bottom: 3%;">
+            <!-- <div class="button-slider" style="margin-bottom: 3%;">
                 <div class="btn-group">
                 <div class="btn btn-default">T2</div>
                 <div class="btn btn-default">
@@ -67,7 +79,7 @@
             <div class="valueLabel">A is<span id="sliderValue-A">3</span></div>
           </div>
           </div>
-          </div>
+          </div> -->
 
             </div>
           </div>
@@ -88,7 +100,13 @@
                <div id="chart_div2" ></div>
             </div>
             <div class="timeline-body">
-             <div class="button-slider">
+
+            <div class="slider-wrapper">
+                <input type="text" class="js-N" />
+                <label class="display-box-label">T2(s):</label>
+              <div id="js-display-N" class="display-box"></div>
+            </div>
+             <!-- <div class="button-slider">
                   <div class="btn-group">
                   <div class="btn btn-default">N</div>
                   <div class="btn btn-default">
@@ -96,7 +114,7 @@
                   <div class="valueLabel">N is<span id="sliderValue-N">10</span></div>
                     </div>
                   </div>
-            </div>
+            </div> -->
             </div>
           </div>
           <div class="timeline-panel" style="margin-left: 2%;">
