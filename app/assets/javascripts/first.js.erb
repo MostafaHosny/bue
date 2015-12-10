@@ -24,12 +24,7 @@
                    name: "A",
                    data:[],
                   color: 'blue',
-                  shadow: {
-                        color: 'blue',
-                        width: 5,
-                        offsetX: 0,
-                        offsetY: 0
-                    }
+                  
                 }],
                 title: {
             text: 'Time domain',
@@ -82,7 +77,7 @@
        // var max = 20*1/parseInt($('.js-t1').val())+ parseInt($('.js-t2').val());
                 series: [{
                   borderWidth: 0,
-                  pointWidth: 1,
+                  pointWidth: 2,
                    showInLegend: false,
                   animation: false,
                    name: "C(N)" ,
@@ -129,7 +124,7 @@
 
                   animation: false,
                    borderWidth: 0,
-                   pointWidth: 1,
+                   pointWidth: 2,
                    showInLegend: false,
                    name: "Phase(N)",
                    data:[],
@@ -265,10 +260,10 @@
       changechart($('.js-t1').val(),$('.js-t2').val(),$('.js-A').val())
       changef($('.js-t1').val(),$('.js-t2').val(),$('.js-A').val(),$('.js-N').val());
   document.getElementById('js-display-total').innerHTML = parseInt($('.js-t1').val())+ parseInt($('.js-t2').val());
-    $("#bootstrap-slider-t1").slider();
-    $("#bootstrap-slider-t2").slider();
-    $("#bootstrap-slider-A").slider();
-    $("#bootstrap-slider-N").slider();
+    // $("#bootstrap-slider-t1").slider();
+    // $("#bootstrap-slider-t2").slider();
+    // $("#bootstrap-slider-A").slider();
+    // $("#bootstrap-slider-N").slider();
     
     $("#bootstrap-slider-t1").on("slide", function(slideEvt) {
        var tempScrollTop = $(window).scrollTop();
