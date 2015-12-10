@@ -1,0 +1,90 @@
+<div class="banner">
+          <div class="banner-slider">
+            <div  id="top" class="callbacks_container">
+            <ul class="rslides" id="slider3">
+            <li>
+              <div class="banner-info">
+                 <h3>Teach Truth...</h3>
+                <p>Lorem Ipsum Maecenas tristique orci ac sem. Duis ultricies pharetra magna.<lable> Donec accumsan malesuada orci. Donec sit amet eros. Lorem ipsumipsum dolor sit amet,</lable> consectetuer dolor sit.</p>
+              </div>
+            </li>
+            <li>
+              <div class="banner-info">
+               <h3>Study Anywhere </h3>
+              <p>Lorem Ipsum Maecenas tristique orci ac sem. Duis ultricies pharetra magna.<lable> Donec accumsan malesuada orci. Donec sit amet eros. Lorem ipsumipsum dolor sit amet,</lable> consectetuer dolor sit.</p>    
+             </div>
+            <li>
+               <div class="banner-info">
+                <h3>Teach Truth...</h3>
+                <p>Lorem Ipsum Maecenas tristique orci ac sem. Duis ultricies pharetra magna.<lable> Donec accumsan malesuada orci. Donec sit amet eros. Lorem ipsumipsum dolor sit amet,</lable> consectetuer dolor sit.</p>
+              </div>
+            </li>
+          </ul>
+           </div>
+         </div>
+       </div>
+       <!--banner-slide-->
+        
+        <script>
+            // You can also use "$(window).load(function() {"
+            $(function () {
+              // Slideshow 4
+              $("#slider3").responsiveSlides({
+                auto: true,
+                pager:true,
+                nav:false,
+                speed: 500,
+                namespace: "callbacks",
+                before: function () {
+                  $('.events').append("<li>before event fired.</li>");
+                },
+                after: function () {
+                  $('.events').append("<li>after event fired.</li>");
+                }
+              });
+        
+            });
+          </script>
+
+       <!--//banner-slide-->
+        <div class="clearfix"></div>
+       <!--end-banner-->
+
+        <!--contact-->
+      <div class="contact" id="contact">
+          <h3 class="tittle two">Contact</h3>
+            <div class="contact-top">
+              <div class="col-md-8 contact-top-right">
+                <form>
+                  <input type="text" class="text" value="Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}">
+                   <input type="text" class="text" value="Email Address" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email Address';}">
+                  <textarea value="Message" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message';}">Message</textarea>
+                  <div class="sub-button">
+                    <input type="submit" value="SEND">
+                  </div>
+                </form>
+              </div>
+              <div class="col-md-4 contact-top-left">
+              <div class="contact-top-one">
+                <h4>Address:</h4>
+                  <p>Newyork Still Road.
+                  <span>756 gt globel Place,</span>
+                    CD-Road,M 07 435.
+                  </p>
+              </div>
+              <div class="contact-top-one">
+                <h4>Phone:</h4>
+                  <p>Telephone: +00000000000
+                  <span>FAX: 000000000000</span>
+                  </p>
+              </div>
+              <div class="contact-top-one">
+                <h4>E-mail:</h4>
+                <p><a href="mailto:info@example.com">mail@example.com</a></p>
+              </div>
+            </div>
+            <div class="clearfix"> </div>
+          </div>
+        </div>
+        <!--contact-->
+        
