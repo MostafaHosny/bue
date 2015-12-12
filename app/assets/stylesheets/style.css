@@ -1025,7 +1025,7 @@ p.para {
 	  width: 24%;
 	}
 	.banner {
-	  background: url(/assets/banner.jpg) no-repeat center top;
+	  background: url(banner.jpg) no-repeat center top;
 	  background-size: cover;
 	  -webkit-background-size: cover;
 	  -moz-background-size: cover;
@@ -1136,7 +1136,7 @@ p.para {
      font-size: 2.5em;
     }
 	.banner {
-	  background: url(/assets/banner.jpg) no-repeat center top;
+	  background: url(banner.jpg) no-repeat center top;
 	  background-size: cover;
 	  -webkit-background-size: cover;
 	  -moz-background-size: cover;
@@ -1187,7 +1187,7 @@ p.para {
 	  font-size: 2.2em;
 	}
 	.banner {
-	  background: url(/assets/banner.jpg) no-repeat center top;
+	  background: url(banner.jpg) no-repeat center top;
 	  background-size: cover;
 	  -webkit-background-size: cover;
 	  -moz-background-size: cover;
@@ -1320,7 +1320,7 @@ p.para {
 	  display: none;
 	}
 	.banner {
-	  background: url(/assets/banner.jpg) no-repeat center top;
+	  background: url(banner.jpg) no-repeat center top;
 	  background-size: cover;
 	  -webkit-background-size: cover;
 	  -moz-background-size: cover;
