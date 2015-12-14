@@ -156,8 +156,97 @@
                 
             };
 
+            var options4 = {
+                chart: {
+              renderTo: 'chart4',
+          },
+              
+             credits: {
+            enabled: false
+        },
+        subtitle: {
+            text: 'Source: WorldClimate.com',
+            x: -20
+        },
+        xAxis: {
+            categories: []
+        },
+        yAxis: {
+            title: {
+                text: 'Sin (x)'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+            showInLegend: false,
+            name: 'sin(x)',
+            data: []
+        }
+         ]
+}
+    
+     var X = numeric.linspace(0, 10 ,1000);
+     var T = 4 ;
+     var L = T / 2 ;
+
+    function f(x) {
+      // return  numeric.sin(x.map(function(xe) { return xe * Math.PI*1000; }));
+       return Math.sin(x*Math.PI*1000);
+    }
+
+    //"a" coefficient calculation.
+function A(n, L , accuracy) {
+     accuracy = 1000;
+     a =-L ;
+     b = L;
+     dx = (b - a) / accuracy
+     integration = 0
+    for ( i in numeric.linspace(a, b, accuracy)) {
+         x = a + i * dx
+        integration += f(x) * Math.cos((n * Math.PI * x) / L)
+    }
+    integration *= dx
+    return (1 / L) * integration
+}
+// "b" coefficient calculation.
+function B(n, L, accuracy){
+    accuracy = 1000
+     a = -L
+     b =  L
+     dx = (b - a) / accuracy
+     integration = 0
+    for (i in numeric.linspace(a, b, accuracy)){
+        x = a + i * dx
+        integration += f(x) * Math.sin((n * Math.PI * x) / L)
+    }
+    integration *= dx
+    return (1 / L) * integration
+  }
+
+// Fourier series.   
+function Sf(x, L, n ){
+    a0 = A(0, L)
+    var sum = 0 ;
+    for (i in numeric.linspace(1, n )){
       
-       
+        sum += ((B(i, L) * Math.cos(n * Math.PI * x)) + (B(i, L) * Math.sin(n * Math.PI * x)))
+    }
+    return (a0 / 2) + sum   
+  }
+
     function changechart(t1,t2,a) {
 
          t1 = parseInt(t1)
@@ -188,6 +277,22 @@
          var chart = new Highcharts.Chart(options);
         // var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
         // chart.draw(data, options);
+    }
+
+    function drow (n){
+        var data4 =  [] ;
+         var cat = []
+      for (var i in X ) {
+        cat.push(X[i])
+        data4.push(f(X[i])) 
+        }
+    
+        // }
+       
+
+        options4.series[0].data = data4;
+        options4.xAxis.categories = cat;
+       var chart4 = new Highcharts.Chart(options4);
     }
 
     function changef(t1,t2,a,n,max) {
@@ -261,6 +366,7 @@
       changechart($('.js-t1').val(),$('.js-t2').val(),$('.js-A').val())
       changef($('.js-t1').val(),$('.js-t2').val(),$('.js-A').val(),$('.js-N').val());
   document.getElementById('js-display-total').innerHTML = parseInt($('.js-t1').val())+ parseInt($('.js-t2').val());
+  drow($('.js-N').val())
     // $("#bootstrap-slider-t1").slider();
     // $("#bootstrap-slider-t2").slider();
     // $("#bootstrap-slider-A").slider();
