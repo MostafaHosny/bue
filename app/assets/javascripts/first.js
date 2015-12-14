@@ -165,7 +165,7 @@
             enabled: false
         },
         subtitle: {
-            text: 'Source: WorldClimate.com',
+            text: 'Fourier series',
             x: -20
         },
         xAxis: {
@@ -193,18 +193,23 @@
         series: [{
             showInLegend: false,
             name: 'sin(x)',
+            data: []},
+            {
+            showInLegend: false,
+            name:'Fourier series',
             data: []
         }
+        
          ]
 }
     
-     var X = numeric.linspace(0, 10 ,1000);
+     var X = numeric.linspace(0, 10 ,100);
      var T = 4 ;
      var L = T / 2 ;
 
     function f(x) {
       // return  numeric.sin(x.map(function(xe) { return xe * Math.PI*1000; }));
-       return Math.sin(x*Math.PI*1000);
+       return Math.sin(x*Math.PI*100);
     }
 
     //"a" coefficient calculation.
@@ -237,12 +242,12 @@ function B(n, L, accuracy){
   }
 
 // Fourier series.   
-function Sf(x, L, n ){
+function sf(x, L, n ){
     a0 = A(0, L)
     var sum = 0 ;
     for (i in numeric.linspace(1, n )){
       
-        sum += ((B(i, L) * Math.cos(n * Math.PI * x)) + (B(i, L) * Math.sin(n * Math.PI * x)))
+        sum += ((A(i, L) * Math.cos(n *Math.PI*x)) + (B(i, L) * Math.sin(n * Math.PI * x)))
     }
     return (a0 / 2) + sum   
   }
@@ -281,16 +286,19 @@ function Sf(x, L, n ){
 
     function drow (n){
         var data4 =  [] ;
-         var cat = []
+         var cat = [];
+         var Sf =  [] ;
       for (var i in X ) {
         cat.push(X[i])
         data4.push(f(X[i])) 
+         Sf.push(sf(X[i],2,10))
         }
     
         // }
        
 
         options4.series[0].data = data4;
+        options4.series[1].data = Sf;
         options4.xAxis.categories = cat;
        var chart4 = new Highcharts.Chart(options4);
     }
