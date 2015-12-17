@@ -4,13 +4,15 @@ class ExperimentsController < ApplicationController
   # GET /experiments
   # GET /experiments.json
   def index
-    @experiments = Experiment.all
+    # redirect_to :action=>'first'
+    # render :first
+    # @experiments = Experiment.all
   end
 
   # GET /experiments/1
   # GET /experiments/1.json
   def show
-     render "first"
+    render 'first'
   end
 
   # GET /experiments/new
