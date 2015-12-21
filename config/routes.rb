@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   root to: 'home#index'
   resources :home
   get 'experiments/first'
+  # get 'experiments/first' => 'experiments#first', :as => :first
+  get 'experiments/oscillating'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

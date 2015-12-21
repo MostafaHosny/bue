@@ -1,5 +1,5 @@
 class ExperimentsController < ApplicationController
-   # before_action :set_experiment, only: [:show, :edit, :update, :destroy]
+    # before_action :set_experiment, only: [:show, :edit, :update, :destroy]
 
   # GET /experiments
   # GET /experiments.json
@@ -12,7 +12,11 @@ class ExperimentsController < ApplicationController
   # GET /experiments/1
   # GET /experiments/1.json
   def show
-    render 'first'
+    if params[:id].to_i == 1
+     render 'first'
+   elsif params[:id].to_i == 2
+     render 'oscillating'
+   end
   end
 
   # GET /experiments/new
@@ -26,6 +30,10 @@ class ExperimentsController < ApplicationController
 
    # expirment 1
   def first
+ 
+  end
+
+  def oscillating
 
   end
 
