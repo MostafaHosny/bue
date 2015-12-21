@@ -35,6 +35,7 @@ gem 'autoprefixer-rails'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
+gem 'socket.io-rails'
 #auth
 gem 'devise'
 # Use Capistrano for deployment

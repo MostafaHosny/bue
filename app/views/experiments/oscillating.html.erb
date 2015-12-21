@@ -20,29 +20,22 @@
         <li>
           <div class="timeline-panel">
             <div class="timeline-heading">
-               
+               <h4>Task(1):Induced Voltage</h4>
             </div>
             <div class="timeline-body">
-             <div class="slider-wrapper">
-            <input type="text" class="js-t1" />
-            <label class="display-box-label">T1(sec):</label>
-            <div id="js-display-t1" class="display-box"></div>
-            </div>
-
-            <div class="slider-wrapper">
-                <input type="text" class="js-t2" />
-                <label class="display-box-label">T2(sec):</label>
-                <div id="js-display-t2" class="display-box"></div>
-            </div>
-
-            </div>
+             <div class="form_row">
+             <fieldset>
+                    <h6>Please select The Coil:</h6>
+                    <input type="radio" name="coil" id="coil1" value="1500" /><label for="1500"> Coil(1) 1500</label><br />
+                    <input type="radio" name="coil" id="coil2" value="2500"  /><label for="2500"> Coil(2) 2500</label><br />
+                    <input type="radio" name="coil" id="coil3" value="3500" /><label for="3500"> Coil(3) 3500</label><br />
+                </fieldset>
+          </div>
+          </div>
           </div>
           <div class="timeline-panel" style="margin-left: 2%;">
             <div class="timeline-heading">
-               <select class="btn btn-info" id="select_chart"  >
-                  <option value="1">Squre</option>
-                  <option value="2">Tri</option>
-                </select>
+              
             </div>
             <div class="timeline-body">
             </div>
@@ -62,9 +55,37 @@
               <div id="chart3" ></div>
             </div>
             <div class="timeline-body">
+            <div id="messages"></div>
             </div>
           </div>
         </li>    
     </ul>
 
+<script src="https://cdn.socket.io/socket.io-1.3.7.js"></script>
+<script>
+  var socket = io('http://localhost:3001');
 
+ socket.on('welcome', function(data) {
+                addMessage(data.message);
+
+                // Respond with a message including this clients' id sent from the server
+                socket.emit('i am client', {data: 'foo!', id: data.time});
+            });
+            socket.on('time', function(data) {
+                addMessage(data.time);
+                socket.emit('i am client', {data: 'foo!', id: data.time});
+            });
+            socket.on('error', console.error.bind(console));
+            socket.on('message', console.log.bind(console));
+
+            function addMessage(message) {
+                var text = document.createTextNode(message),
+                    el = document.createElement('li'),
+                    messages = document.getElementById('messages');
+
+                el.appendChild(text);
+                messages.appendChild(el);
+            }
+  
+
+</script>
