@@ -211,7 +211,15 @@ nav a:focus {
 	}
 }
 /*--start-banner--*/
-
+.banner {
+  background: url(/assets/banner.jpg) no-repeat center top;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -ms-background-size: cover;
+  min-height: 505px;
+}
 .banner-info {
    width: 45%;
    margin: 13% auto 0;
@@ -225,13 +233,13 @@ nav a:focus {
 .banner-info h3 {
   font-size: 2.8em;
   font-weight: 400;
-  color: #187CA5;
+  color:#f5f5f5;
   line-height: 1.4em;
 }
 .banner-info p {
-    font-size: 1.5em;
+  font-size: 1.5em;
   font-weight: 400;
-  color: #f5f5f5;
+  color: #fff;
   margin: 0.5em 0 0;
   line-height: 1.8em;
 }
@@ -257,6 +265,8 @@ nav a:focus {
   position: relative;
   float: left;
   width: 100%;
+  height: 90%;
+  background-color: rgba(0, 0, 0, .5);
 }
 .callbacks {
   position: relative;
@@ -440,7 +450,7 @@ background: none;
   padding: 0;
   overflow: visible;
   text-align: center;
-  border-right: 1px dotted #18C9D2;
+    border-right: 1px dotted #18C9D2;
 }
 .icon i{
  color:#fff;
@@ -501,7 +511,6 @@ background: none;
 #about {
   background-color: #fff;
   padding: 5em 0;
-  margin-top: 2%;
 }
 h3.tittle.two {
   color: #333;
@@ -682,6 +691,7 @@ p.para {
 	-o-transform: scale(0);
 	-ms-transform: scale(0);
 	transform: scale(0);
+	
 	opacity: 0;
 } 
 
@@ -691,6 +701,7 @@ p.para {
 	-o-transform: scale(1);
 	-ms-transform: scale(1);
 	transform: scale(1);
+	
 	opacity: 1;
 	pointer-events: auto;
 }
@@ -751,7 +762,7 @@ p.para {
   text-align: center;
 }
 .view a.info {
-  display: inline-block;
+    display: inline-block;
   text-decoration: none;
   padding: 7px 14px;
   background: #333;
@@ -762,7 +773,7 @@ p.para {
   box-shadow: 0 0 1px #333;
   font-size: 0.8em;
 }
-.view a.info:hover {
+.view a.info:hover{
    -webkit-box-shadow: 0 0 5px #000;
    -moz-box-shadow: 0 0 5px #000;
    box-shadow: 0 0 5px #000;
@@ -1018,7 +1029,7 @@ p.para {
 	  width: 24%;
 	}
 	.banner {
-	  background: url(banner.jpg) no-repeat center top;
+	  background: url(/assets/banner.jpg) no-repeat center top;
 	  background-size: cover;
 	  -webkit-background-size: cover;
 	  -moz-background-size: cover;
@@ -1129,7 +1140,7 @@ p.para {
      font-size: 2.5em;
     }
 	.banner {
-	  background: url(banner.jpg) no-repeat center top;
+	  background: url(/assets/banner.jpg) no-repeat center top;
 	  background-size: cover;
 	  -webkit-background-size: cover;
 	  -moz-background-size: cover;
@@ -1180,7 +1191,7 @@ p.para {
 	  font-size: 2.2em;
 	}
 	.banner {
-	  background: url(banner.jpg) no-repeat center top;
+	  background: url(/assets/banner.jpg) no-repeat center top;
 	  background-size: cover;
 	  -webkit-background-size: cover;
 	  -moz-background-size: cover;
@@ -1313,7 +1324,7 @@ p.para {
 	  display: none;
 	}
 	.banner {
-	  background: url(banner.jpg) no-repeat center top;
+	  background: url(/assets/banner.jpg) no-repeat center top;
 	  background-size: cover;
 	  -webkit-background-size: cover;
 	  -moz-background-size: cover;
