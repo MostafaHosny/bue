@@ -76,7 +76,42 @@ function drow (){
        var chart4 = new Highcharts.Chart(options4);
     }
 
+    var clbkprm = document.querySelector('.js-PRM');
+    var initClbk = new Powerange(clbkprm, { callback: displayPRM, start: 10 ,min: 0, max: 1024 });
+    function displayPRM() {
+          document.getElementById('js-display-PRM').innerHTML = clbkprm.value;
+          document.getElementById('PRM_value').value = clbkprm.value;
+        }
+
+
+    
+
+        function sendMessage()
+        {
+          var res;
+          submitAjaxRequest("POST",
+                  "/experiments/send_to_rasp",
+                  "coil=" + document.getElementById('PRM_value').value + "&prm="+document.getElementById('PRM_value').value,
+                 res)
+                 console.log ();
+        }
      $(document).ready(function(){
 
         drow();
+
+        $('#Measure').click(function(){
+           var coil ; 
+          if($("input[type='radio'].radioBtnClass").is(':checked')) {
+           coil = $("input[type='radio'].radioBtnClass:checked").val();
+          }
+
+          $.ajax({
+          url: "/experiments/send_to_rasp",
+          type: "POST",
+          data: {
+                   coil: coil, 
+                   prm: document.getElementById('PRM_value').value },
+          success: function(resp){ }
+});
+        })
      })

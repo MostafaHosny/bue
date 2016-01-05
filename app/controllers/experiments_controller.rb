@@ -1,6 +1,7 @@
 class ExperimentsController < ApplicationController
     # before_action :set_experiment, only: [:show, :edit, :update, :destroy]
-
+skip_before_action :verify_authenticity_token
+require 'socket'
   # GET /experiments
   # GET /experiments.json
   def index
@@ -35,6 +36,21 @@ class ExperimentsController < ApplicationController
 
   def oscillating
 
+  end
+
+  def send_to_rasp
+    # sock = TCPSocket.new('192.168.1.10', 3000)
+    puts params[:coil]
+    puts params[:prm]
+
+    coil = params[:coil].to_i
+    prm = params[:prm].to_i
+    
+     puts [0 , 0 , coil].pack('C*')
+     puts [01 , prm >> 8 , prm].pack('C*')
+    # sock.write 
+    # sock.close
+    render json: {done: ""} ,status: 200 
   end
 
   # POST /experiments

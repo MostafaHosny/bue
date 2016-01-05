@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'experiments/first'
   # get 'experiments/first' => 'experiments#first', :as => :first
   get 'experiments/oscillating'
+  post 'experiments/send_to_rasp'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
