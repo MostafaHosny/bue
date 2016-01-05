@@ -99,6 +99,9 @@ function drow (){
 
         drow();
 
+
+       
+    
         $('#Measure').click(function(){
            var coil ; 
           if($("input[type='radio'].radioBtnClass").is(':checked')) {
