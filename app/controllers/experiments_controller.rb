@@ -1,6 +1,6 @@
 class ExperimentsController < ApplicationController
     # before_action :set_experiment, only: [:show, :edit, :update, :destroy]
-before_action :authenticate_user!
+before_action :http_login,:authenticate_user!
 skip_before_action :verify_authenticity_token
 require 'socket'
   # GET /experiments
@@ -10,6 +10,12 @@ require 'socket'
     # render :first
     # @experiments = Experiment.all
   end
+
+  def http_login
+    user = 'user'
+    pw = ''
+    request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials(user,pw)
+  end  
 
   # GET /experiments/1
   # GET /experiments/1.json
