@@ -36,12 +36,13 @@ require 'socket'
   end
 
   def oscillating
-  @sock = TCPSocket.new('41.41.206.79', 51717)
+ 
   end
 
   def send_to_rasp
-    puts params[:coil]
-    puts params[:prm]
+    @sock = TCPSocket.new('41.41.206.79', 51717)
+    # puts params[:coil]
+    # puts params[:prm]
 
     coil = params[:coil].to_i
     prm = params[:prm].to_i
@@ -49,7 +50,7 @@ require 'socket'
      @sock.write [0 , 0 , coil].pack('C*')
      @sock.write [01 , prm >> 8 , prm].pack('C*')
       
-     # sock.close
+     @sock.close
     render json: {done: ""} ,status: 200 
   end
 
