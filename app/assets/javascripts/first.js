@@ -390,7 +390,7 @@ function sf(x, L, n ){
       changechart($('.js-t1').val(),$('.js-t2').val(),$('.js-A').val())
       changef($('.js-t1').val(),$('.js-t2').val(),$('.js-A').val(),$('.js-N').val());
   document.getElementById('js-display-total').innerHTML = parseInt($('.js-t1').val())+ parseInt($('.js-t2').val());
-  drow($('.js-N').val())
+  // drow($('.js-N').val())
     // $("#bootstrap-slider-t1").slider();
     // $("#bootstrap-slider-t2").slider();
     // $("#bootstrap-slider-A").slider();

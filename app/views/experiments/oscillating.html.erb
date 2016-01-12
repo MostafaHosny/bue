@@ -29,9 +29,9 @@
               <div class="form-group">
                 <fieldset id="coil">
                       <h6>Please select The Coil:</h6>
-                      <input type="radio" class="radioBtnClass" name="coil" id="coil1" value="0"checked="true"/><label for="1500"> Coil(1) 400</label><br />
-                      <input type="radio" class="radioBtnClass" name="coil" id="coil2" value="1" /><label for="2500"> Coil(2) 800</label><br />
-                      <input type="radio" class="radioBtnClass" name="coil" id="coil3" value="2"/><label for="3500"> Coil(3) 1200</label><br />
+                      <input type="radio" class="radioBtnClass" name="coil" id="coil1" value="0"checked="true"/><label for="1500"> Coil(1) 800</label><br />
+                      <input type="radio" class="radioBtnClass" name="coil" id="coil2" value="1" /><label for="2500"> Coil(2) 2300</label><br />
+                      <input type="radio" class="radioBtnClass" name="coil" id="coil3" value="2"/><label for="3500"> Coil(3) 3500</label><br />
                   </fieldset>
                   </div>
 
@@ -41,7 +41,7 @@
                   </div>
               </div>
             <div class="col-md-6">
-              <h5>Requested PRM:</h5>
+              <h5>Requested RPM:</h5>
                 <div class="slider-wrapper">
                   <input type="text" class="js-PRM" />
                  <!--  <label class="display-box-label" style="position: initial;"></label> -->
@@ -50,22 +50,24 @@
                 
             </div>
           </div>
-          <div class="row">
+         
+             
+            
+             <br>
+              <label >RPM:</label>
+               <input type="text"  id="PRM_value" name="Real_PRM" class="form-control" disabled="disabled"><br>
+                <div class="row">
+                <div class="col-md-6"> 
+               <input type="text" id ="Voltage" name="Induced_Voltage"  class="form-control" placeholder="Induced Voltage">
+                </div>
             <div class="col-md-6">  
             <div class="form-group">
-             <br>
-              <label >PRM:</label>
-               <input type="text"  id="PRM_value" name="Real_PRM" class="form-control" disabled="disabled"><br>
-               <input type="text" name="Induced_Voltage" class="form-control" placeholder="Induced Voltage">
+             <button type="button" id="add_voltage" onclick="addrow()" class="btn btn-info" >Add Voltage</button>
             </div>
-           </div>
-           <div class="col-md-6">  
-            <div class="form-group">
-             <button type="button" id="add_voltage" class="btn btn-info" >Add Voltage</button>
+                </div>
             </div>
-           </div>
-
-          </div>
+           
+          
 
           </div>
           </div>
@@ -80,9 +82,9 @@
         </li>
         <li >
           <div class="timeline-panel">
-            <div class="timeline-heading">
-            <iframe src="http://41.41.206.80/video.cgi" width="480px" height="400px"
-            scrolling="no" marginwidth="0" marginheight="0" frameborder="0" vspace="0" hspace="0"/>
+            <div class="timeline-heading" id = "parentDivId">
+<!--             <iframe src="http://41.41.206.80/video.cgi" width="480px" height="400px"
+            scrolling="no" marginwidth="0" marginheight="0" frameborder="0" vspace="0" hspace="0"/> -->
             </div>
             <div class="timeline-body">
             
@@ -95,7 +97,7 @@
             <div class="timeline-body">
             <div class="panel panel-default">
                         <div class="panel-heading">
-                            Data table
+                            Coil(1)400-table
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -103,30 +105,12 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Real PRM</th>
-                                            <th>Frequency</th>
+                                            <th>RPM</th>
                                             <th>Induced Voltage</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>350</td>
-                                            <td>15.04</td>
-                                            <td>1.78</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>400</td>
-                                            <td>13</td>
-                                            <td>2.04</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>450</td>
-                                            <td>13</td>
-                                            <td>2.2</td>
-                                        </tr>
+                                      
                                     </tbody>
                                 </table>
                             </div>
