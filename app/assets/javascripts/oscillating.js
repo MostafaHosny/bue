@@ -2,21 +2,33 @@
   var options4 = {
                 chart: {
               renderTo: 'chart4',
+               type: 'spline'
           },
               
              credits: {
             enabled: false
         },
+        plotOptions: {
+    line: {
+        marker: {
+            enabled: false
+        }
+    }
+},
         subtitle: {
             text: 'PRM',
         },
         xAxis: {
+          gridLineWidth: .5,
+              ordinal: false,
             title: {
                 text: 'RPM'
             },
-            categories: []
+            
         },
         yAxis: {
+             gridLineWidth: .5,
+              ordinal: false,
             title: {
                 text: 'Induced Voltage (volt)'
             },
@@ -36,43 +48,71 @@
             borderWidth: 0
         },
         series: [{
-            showInLegend: false,
-            name: 'Coil 1',
-            data: []},
-            {
-            showInLegend: false,
-            name:'Coil 2',
+            pointWidth: 1,
+            name: 'Coil(1)',
+            data: []
+        },
+        {
+            pointWidth: 1,
+            name: 'Coil(2)',
+            data: []
+        },
+        {
+            pointWidth: 1,
+            name: 'Coil(3)',
             data: []
         }
-        
-         ]
+        ]
 }
 
     // cells = table.getElementsByTagName('td');
 
-    var table = document.getElementById('tableID');
+    var table1 = document.getElementById('coil1table');
+    var table2 = document.getElementById('coil2table');
+    var table3 = document.getElementById('coil3table');
 
 function drow (){
 
 
          var x =  [] ;
          var coil1 = [];
+         var coil2 = [];
+         var coil3 = [];
+
     
-    for (var i = 1 ; i <= table.rows.length-1; i++) {
+    for (var i = 1 ; i <= table1.rows.length-1; i++) {
         for (var j = 0;  j<= 2; j++) {
             if (j==1) {
-                  x.push(parseFloat(table.rows[i].cells[j].innerText))
-                 coil1.push(parseFloat(table.rows[i].cells[j+1].innerText))
+                  // x.push(parseFloat(table.rows[i].cells[j].innerText))
+                 coil1.push([parseFloat(table1.rows[i].cells[j].innerText),parseFloat(table1.rows[i].cells[j+1].innerText)]);
                  //  console.log (table.rows[i].cells[j].innerText) // x
                  // console.log (table.rows[i].cells[j+2].innerText) // y
             }
         }  
     }
-        // }
-       
 
+    for (var i = 1 ; i <= table2.rows.length-1; i++) {
+        for (var j = 0;  j<= 2; j++) {
+            if (j==1) {
+                 coil2.push([parseFloat(table2.rows[i].cells[j].innerText),parseFloat(table2.rows[i].cells[j+1].innerText)]);
+            }
+        }  
+    }
+      
+      for (var i = 1 ; i <= table3.rows.length-1; i++) {
+        for (var j = 0;  j<= 2; j++) {
+            if (j==1) {
+                 coil3.push([parseFloat(table3.rows[i].cells[j].innerText),parseFloat(table3.rows[i].cells[j+1].innerText)]);
+            }
+        }  
+    }
+       
+        coil1.sort(sortFunction)
+        coil2.sort(sortFunction)
         options4.series[0].data = coil1;
-         options4.xAxis.categories = x;
+        options4.series[1].data = coil2;
+        options4.series[2].data = coil3;
+         // options4.xAxis.categories = x;
        var chart4 = new Highcharts.Chart(options4);
     }
 
@@ -84,18 +124,19 @@ function drow (){
           return (a[0] < b[0]) ? -1 : 1;
             }
         }
-
+    var coil ;
     var clbkprm = document.querySelector('.js-PRM');
-    var initClbk = new Powerange(clbkprm, { callback: displayPRM, start: 10 ,min: 0, max: 1024 });
+    var initClbk = new Powerange(clbkprm, { callback: displayPRM, start: 0 ,min: 0, max: 400 });
     function displayPRM() {
-          document.getElementById('js-display-PRM').innerHTML = clbkprm.value;
+         
           document.getElementById('PRM_value').value = clbkprm.value;
 
           // if (clbkprm.value == 0)
           // {
-             var coil ; 
+       
           if($("input[type='radio'].radioBtnClass").is(':checked')) {
            coil = $("input[type='radio'].radioBtnClass:checked").val();
+          
           }
 
           $.ajax({
@@ -110,7 +151,55 @@ function drow (){
         }
 
 
-    
+        
+        function isNumberKey(txt, evt) {
+
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode == 46) {
+        //Check if the text already contains the . character
+        if (txt.value.indexOf('.') === -1) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        if (charCode > 31
+             && (charCode < 48 || charCode > 57))
+            return false;
+      }
+      return true;
+    }
+
+      
+  function handleClick(myRadio) {
+    if (myRadio.value == 0)
+    {
+      $('#coil1table').show();
+      $('#coil2table').hide();
+      $('#coil3table').hide();
+    }
+    else if (myRadio.value == 1)
+    {
+      $('#coil1table').hide();
+      $('#coil2table').show();
+      $('#coil3table').hide();
+    }
+    else if (myRadio.value == 2)
+    {
+       $('#coil1table').hide();
+      $('#coil2table').hide();
+      $('#coil3table').show();
+    }
+
+    $.ajax({
+          url: "/experiments/send_to_rasp",
+          type: "POST",
+          data: {
+                   coil: myRadio.value, 
+                   prm: document.getElementById('PRM_value').value },
+          success: function(resp){ }
+      });
+    }
 
         function sendMessage()
         {
@@ -122,11 +211,39 @@ function drow (){
                  console.log ();
         }
 
+
         function addrow()
         {
-          $('#tableID tbody').append('<tr class="child"><td>'+table.rows.length+'</td> <td>'+document.getElementById('PRM_value').value +'</td><td>'+document.getElementById('Voltage').value +'</td></tr>');
+          if($('#Voltage').val() != ''){
+      
+   
+
+          if($("input[type='radio'].radioBtnClass").is(':checked')) {
+           coil = $("input[type='radio'].radioBtnClass:checked").val();
+          
+          }
+
+          if (coil == 0 )
+          {
+          $('#coil1table tbody').append('<tr class="child"><td>'+table1.rows.length+'</td> <td>'+document.getElementById('PRM_value').value +'</td><td>'+document.getElementById('Voltage').value +'</td></tr>');
+          }
+          else if (coil == 1 )
+          {
+             $('#coil2table tbody').append('<tr class="child"><td>'+table2.rows.length+'</td> <td>'+document.getElementById('PRM_value').value +'</td><td>'+document.getElementById('Voltage').value +'</td></tr>');
+
+          }
+          else if (coil == 2)
+          {
+             $('#coil3table tbody').append('<tr class="child"><td>'+table3.rows.length+'</td> <td>'+document.getElementById('PRM_value').value +'</td><td>'+document.getElementById('Voltage').value +'</td></tr>');
+
+          }
           drow();
         }
+        else
+        {
+
+        }
+      }
      $(document).ready(function(){
 
          drow();
@@ -150,26 +267,9 @@ function drow (){
 });
         })
 
-        $("#Voltage").keydown(function (e) {
-        // Allow: backspace, delete, tab, escape, enter and .
-        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
-             // Allow: Ctrl+A
-            (e.keyCode == 65 && e.ctrlKey === true) ||
-             // Allow: Ctrl+C
-            (e.keyCode == 67 && e.ctrlKey === true) ||
-             // Allow: Ctrl+X
-            (e.keyCode == 88 && e.ctrlKey === true) ||
-             // Allow: home, end, left, right
-            (e.keyCode >= 35 && e.keyCode <= 39)) {
-                 // let it happen, don't do anything
-                 return;
-        }
-        // Ensure that it is a number and stop the keypress
-        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-            e.preventDefault();
-        }
-    });
-
+     $('#coil2table').hide();
+     $('#coil3table').hide();
+    
 
         var iframe = document.createElement('iframe');
         iframe.frameBorder=0;
