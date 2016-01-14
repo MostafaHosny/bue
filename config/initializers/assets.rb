@@ -8,7 +8,7 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
 Rails.application.config.assets.precompile += %w( first.js )
 Rails.application.config.assets.precompile += %w( oscillating.js )
-Rails.application.config.assets.precompile += %w( powerange.js )
+
 Rails.application.config.assets.compile = true
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.

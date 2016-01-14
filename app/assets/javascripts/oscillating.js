@@ -84,7 +84,7 @@ function drow (){
         for (var j = 0;  j<= 2; j++) {
             if (j==1) {
                   // x.push(parseFloat(table.rows[i].cells[j].innerText))
-                 coil1.push([parseFloat(table1.rows[i].cells[j].innerText),parseFloat(table1.rows[i].cells[j+1].innerText)]);
+                 coil1.push([parseFloat(table1.rows[i].cells[j].innerHTML),parseFloat(table1.rows[i].cells[j+1].innerHTML)]);
                  //  console.log (table.rows[i].cells[j].innerText) // x
                  // console.log (table.rows[i].cells[j+2].innerText) // y
             }
@@ -94,7 +94,7 @@ function drow (){
     for (var i = 1 ; i <= table2.rows.length-1; i++) {
         for (var j = 0;  j<= 2; j++) {
             if (j==1) {
-                 coil2.push([parseFloat(table2.rows[i].cells[j].innerText),parseFloat(table2.rows[i].cells[j+1].innerText)]);
+                 coil2.push([parseFloat(table2.rows[i].cells[j].innerHTML),parseFloat(table2.rows[i].cells[j+1].innerHTML)]);
             }
         }  
     }
@@ -102,7 +102,7 @@ function drow (){
       for (var i = 1 ; i <= table3.rows.length-1; i++) {
         for (var j = 0;  j<= 2; j++) {
             if (j==1) {
-                 coil3.push([parseFloat(table3.rows[i].cells[j].innerText),parseFloat(table3.rows[i].cells[j+1].innerText)]);
+                 coil3.push([parseFloat(table3.rows[i].cells[j].innerHTML),parseFloat(table3.rows[i].cells[j+1].innerHTML)]);
             }
         }  
     }
