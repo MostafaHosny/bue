@@ -1,16 +1,30 @@
 class ExperimentsController < ApplicationController
-   # before_action :set_experiment, only: [:show, :edit, :update, :destroy]
-
+    # before_action :set_experiment, only: [:show, :edit, :update, :destroy]
+before_action :authenticate_user!
+skip_before_action :verify_authenticity_token
+require 'socket'
   # GET /experiments
   # GET /experiments.json
   def index
-    @experiments = Experiment.all
+    # redirect_to :action=>'first'
+    # render :first
+    # @experiments = Experiment.all
   end
+
+  # def http_login
+  #   user = 'user'
+  #   pw = ''
+  #   request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials(user,pw)
+  # end  
 
   # GET /experiments/1
   # GET /experiments/1.json
   def show
-     render "first"
+    if params[:id].to_i == 1
+     render 'first'
+   elsif params[:id].to_i == 2
+     render 'oscillating'
+   end
   end
 
   # GET /experiments/new
@@ -24,7 +38,26 @@ class ExperimentsController < ApplicationController
 
    # expirment 1
   def first
+ 
+  end
 
+  def oscillating
+ 
+  end
+
+  def send_to_rasp
+    @sock = TCPSocket.new('41.41.206.79', 51717)
+    # puts params[:coil]
+    # puts params[:prm]
+
+    coil = params[:coil].to_i
+    prm = params[:prm].to_i
+    
+     @sock.write [0 , 0 , coil].pack('C*')
+     @sock.write [01 , prm >> 8 , prm].pack('C*')
+      
+     @sock.close
+    render json: {done: ""} ,status: 200 
   end
 
   # POST /experiments

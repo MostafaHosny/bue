@@ -23,6 +23,8 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+gem "font-awesome-rails"
+gem 'sass'
 gem 'rails_12factor', group: :production
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -34,6 +36,7 @@ gem 'autoprefixer-rails'
 # gem 'unicorn'
 gem 'test-unit', '~> 3.0'
 
+gem 'socket.io-rails'
 #auth
 gem 'devise'
 # Use Capistrano for deployment

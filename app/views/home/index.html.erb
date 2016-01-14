@@ -1,0 +1,74 @@
+<div class="banner">
+          <div class="banner-slider">
+            <div  id="top" class="callbacks_container">
+            <ul class="rslides" id="slider3">
+            <li>
+              <div class="banner-info">
+                 <h3>Center for Emerging Learning Technologies</h3>
+                <p>Considering education and learning in their widest sense of making learning accessible anytime to all, our focus will be towards the development of new online interactive educational and learning methodologies people will need when lifelong learning becomes an online activity.</p>
+              </div>
+            </li>
+            
+          </ul>
+           </div>
+         </div>
+       </div>
+       <!--banner-slide-->
+        
+        <script>
+            // You can also use "$(window).load(function() {"
+            $(function () {
+              // Slideshow 4
+              $("#slider3").responsiveSlides({
+                auto: true,
+                pager:true,
+                nav:false,
+                speed: 500,
+                namespace: "callbacks",
+                before: function () {
+                  $('.events').append("<li>before event fired.</li>");
+                },
+                after: function () {
+                  $('.events').append("<li>after event fired.</li>");
+                }
+              });
+        
+            });
+          </script>
+
+       <!--//banner-slide-->
+        <div class="clearfix"></div>
+       <!--end-banner-->
+            <div class="about" id="about">
+          <h3 class="tittle two">Mission</h3>
+           <div class="ab-top">
+          <div class="col-md-6 ab-left">
+          <h3 class="sub-text">Our Mission...</h3>
+           <h5>The main purpose is to carry research activities towards the development and implementation of emerging educational technologies for future online quality experimentation </h5>
+            <h5 class="para">as well as innovative learning methods and associated techniques.</h5>
+          </div>
+       
+        </div>
+         </div>
+        <!--contact-->
+      <div class="contact" id="contact">
+         
+            <div class="contact-top">
+              
+              <div class="col-md-4 contact-top-left">
+              <div class="contact-top-one">
+                <h4>Contact us:</h4>
+                  <p>Center for Emerging Learning Technologies (CELT) <span>
+                  The British University in Egypt (BUE) <span>
+                  El Sherouk City, Cairo –Suez Desert Road <span>
+                  Postal No. 11837 - P.O.Box 43 <span>
+                  Telephone: (202)26890000 <span>
+                  WWW.celt-bue.com</span>
+                  </p>
+              </div>
+            </div>
+            <div class="clearfix"> </div>
+          </div>
+        </div>
+        <!--contact-->
+        
