@@ -277,7 +277,7 @@ function drow (){
         iframe.height="400px";
         iframe.id="myFrame";
         iframe.scrolling="no";
-        iframe.setAttribute("src", 'http://user:@41.38.70.12:4440/video/mjpg.cgi');
+        iframe.setAttribute("src", 'http://user:""@41.38.70.12:4440/video/mjpg.cgi');
         document.getElementById("parentDivId").appendChild(iframe);
      
      })
