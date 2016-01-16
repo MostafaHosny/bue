@@ -7,15 +7,17 @@
   
 </head>
 
-    <body>
-    <ul class="timeline">
-        <li>
-          <div class="timeline-panel">
-            <div class="timeline-heading">
-               <h4> Variation of the Induced Voltage </h4>
-            </div>
-            <div class="timeline-body">
-             <div class="row">
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-6">
+      <div class="offer offer-radius offer-primary">
+        
+        <div class="offer-content">
+          <h3 class="lead">
+            Variation of the Induced Voltage
+          </h3>           
+          <div class="row">
               <div class="col-md-6">
               <div class="form-group">
                 <fieldset id="coil">
@@ -30,150 +32,103 @@
                       <input type="radio" class="radioBtnClass" name="coil" id="coil3" onclick="handleClick(this);" value="2"/><label for="3500"> Coil(3): 3500 turns</label>
                       </div>
                   </fieldset>
-                  </div>
-
-               
-                 
-                  <!-- <button type="button"  id = "Measure" class="btn btn-info" style="margin-top: 10%;">Measure</button> -->
-              <row>
-                  <div class="col-md-7">
+                </div>
+               </div>
+              </div>
+            
+            <div class="row"> 
+              <div class="col-md-3">
                    <label>Selected PRM:</label>
-                  </div>
-              <div class="col-md-5">
-                 <input type="text"  id="PRM_value"  name="Real_PRM" class="form-control" disabled="disabled"><br>
               </div>
-              </row><br>
+              <div class="col-md-3">
+                 <input type="text"  id="PRM_value"  name="Real_PRM" class="form-control" disabled="disabled">
+              </div>
+             </div>
+
                   <div class="slider-wrapper">
-                   <input type="text" class="js-PRM" />
+                    <input type="text" class="js-PRM" />
                   </div>
-                
-                  </div>
-              </div>
-         
-         
-             
-            
-             
               
-               <!-- <input type="text"  id="PRM_value" name="Real_PRM" class="form-control" disabled="disabled"><br> -->
-                <div class="row">
-                <div class="col-md-6"> 
-               <input type="text" id ="Voltage" name="Induced_Voltage" onkeypress="return isNumberKey(this,event);"  class="form-control" placeholder="Induced Voltage">
-                </div>
-            <div class="col-md-6">  
-            <div class="form-group">
-             <button type="button" id="add_voltage" onclick="addrow()" class="btn btn-info" >Submit</button>
-            </div>
-                </div>
-            </div>
-           
-          
-
-          </div>
-          </div>
-          <div class="timeline-panel" style="margin-left: 2%;">
-            <div class="timeline-heading">
-               <div id="chart4"></div>
-            </div>
-            <div class="timeline-body">
-
-            </div>
-          </div>
-        </li>
-        <li >
-          <div class="timeline-panel">
-            <div class="timeline-heading" id = "parentDivId">
-<!--             <iframe src="http://41.41.206.80/video.cgi" width="480px" height="400px"
-            scrolling="no" marginwidth="0" marginheight="0" frameborder="0" vspace="0" hspace="0"/> -->
-            </div>
-            <div class="timeline-body">
-            
-            </div>
-          </div>
-          <div class="timeline-panel" style="margin-left: 2%;">
-            <div class="timeline-heading">
-             
-            </div>
-            <div class="timeline-body">
-            <div class="panel panel-default">
-                        <div class="panel-heading">
-                           
-                        </div>
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover" id="coil1table">
-                                <caption> Coil(1)  </caption>
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>RPM</th>
-                                            <th>Induced Voltage</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                      
-                                    </tbody>
-                                </table>
-                                <table class="table table-striped table-bordered table-hover" id="coil2table" >
-                                <caption> Coil(2) </caption>
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>RPM</th>
-                                            <th>Induced Voltage</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                      
-                                    </tbody>
-                                </table>
-                                <table class="table table-striped table-bordered table-hover" id="coil3table" >
-                                <caption> Coil(3)  </caption>
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>RPM</th>
-                                            <th>Induced Voltage</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                      
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+              <div class="row">
+                  <div class="col-md-6">
+                   <div class="form-group">
+                  <input type="number" step="0.1" id ="Voltage" name="Induced_Voltage" onkeypress="return isNumberKey(this,event);"  class="form-control" placeholder="Induced Voltage">
+                  </div>
+                  </div>
+                  <div class="col-md-6">  
+                    <div class="form-group">
+                      <button type="button" id="add_voltage" onclick="addrow()" class="btn btn-info" >Submit</button>
                     </div>
+                  </div>
             </div>
-          </div>
-        </li>    
-    </ul>
+        </div>
+    </div>
+  </div>
+
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-6">
+      <div class="offer offer-radius offer-primary">
+        
+        <div class="offer-content" id = "parentDivId">
+          
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-6">
+      <div class="offer offer-radius offer-primary">
+        <div class="offer-content">
+          <div id="chart4"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-6">
+      <div class="offer offer-radius offer-primary">
+        <div class="offer-content">
+             <div class="table-responsive" style="
+    margin-top: 4%;">
+                        <table class="table table-striped table-bordered table-hover" id="coil1table">
+                        <caption> Coil(1)  </caption>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>RPM</th>
+                                    <th>Induced Voltage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              
+                            </tbody>
+                        </table>
+                        <table class="table table-striped table-bordered table-hover" id="coil2table" >
+                        <caption> Coil(2) </caption>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>RPM</th>
+                                    <th>Induced Voltage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              
+                            </tbody>
+                        </table>
+                        <table class="table table-striped table-bordered table-hover" id="coil3table" >
+                        <caption> Coil(3)  </caption>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>RPM</th>
+                                    <th>Induced Voltage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              
+                            </tbody>
+                        </table>
+                    </div>
+                  </div>
+                </div>
+            </div>  
+  </div>
+</div>
 </body>
-<!-- <script src="\assets\oscillating.js"></script> -->
-<!-- <script src="https://cdn.socket.io/socket.io-1.3.7.js"></script>
-<script>
-  var socket = io('http://localhost:3001');
-
- socket.on('welcome', function(data) {
-                addMessage(data.message);
-
-                // Respond with a message including this clients' id sent from the server
-                socket.emit('i am client', {data: 'foo!', id: data.time});
-            });
-            socket.on('time', function(data) {
-                addMessage(data.time);
-                socket.emit('i am client', {data: 'foo!', id: data.time});
-            });
-            socket.on('error', console.error.bind(console));
-            socket.on('message', console.log.bind(console));
-
-            function addMessage(message) {
-                var text = document.createTextNode(message),
-                    el = document.createElement('li'),
-                    messages = document.getElementById('messages');
-
-                el.appendChild(text);
-                messages.appendChild(el);
-            }
-  
-
-</script>
