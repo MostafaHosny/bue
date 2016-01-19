@@ -1130,6 +1130,11 @@ p.para {
 	.contact-top-left {
 	  padding-left: 1em;
 	}
+  .img-logo
+  {
+    height: 80px;
+    
+  }
 }
 @media (max-width:640px){
 	.banner-info {

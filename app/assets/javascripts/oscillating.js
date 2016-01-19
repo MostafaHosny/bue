@@ -16,13 +16,13 @@
     }
 },
         subtitle: {
-            text: 'PRM',
+            text: '',
         },
         xAxis: {
           gridLineWidth: .5,
               ordinal: false,
             title: {
-                text: 'RPM'
+                text: 'Motor RPM'
             },
             
         },
@@ -40,6 +40,9 @@
         },
         tooltip: {
             
+        },
+        title:{
+          text:''
         },
         legend: {
             layout: 'vertical',
@@ -59,6 +62,7 @@
         },
         {
             pointWidth: 1,
+            color: '#F44336',
             name: 'Coil(3)',
             data: []
         }
@@ -91,18 +95,30 @@
       $('#coil1table').show();
       $('#coil2table').hide();
       $('#coil3table').hide();
+      
+      $('#exportcoil1').show();
+      $('#exportcoil2').hide();
+      $('#exportcoil3').hide();
     }
     else if (myRadio.value == 1)
     {
       $('#coil1table').hide();
       $('#coil2table').show();
       $('#coil3table').hide();
+
+       $('#exportcoil1').hide();
+      $('#exportcoil2').show();
+      $('#exportcoil3').hide();
     }
     else if (myRadio.value == 2)
     {
        $('#coil1table').hide();
       $('#coil2table').hide();
       $('#coil3table').show();
+
+      $('#exportcoil1').hide();
+      $('#exportcoil2').hide();
+      $('#exportcoil3').show();
     }
 
     $.ajax({
@@ -110,7 +126,7 @@
           type: "POST",
           data: {
                    coil: myRadio.value, 
-                   prm: document.getElementById('PRM_value').value },
+                   },
           success: function(resp){ }
       });
     }
@@ -120,7 +136,7 @@
     var table3 ;
      function addrow()
         {
-          if($('#Voltage').val() != ''){
+          if(($('#Voltage').val() != '') && (parseFloat($('#Voltage').val()) >= 0.0 ) ){
       
    
 
@@ -144,12 +160,18 @@
 
           }
           drow();
+          $('#Voltage').val("");
         }
         else
         {
 
         }
       }
+      
+function tableToExcel(table_num)
+{
+  $('#'+table_num).tableExport({type:'excel', htmlContent:'false',escape:'true'});
+}
 
 
       function drow (){
@@ -205,6 +227,24 @@ function sortFunction(a, b) {
             }
         }
 
+        function sendrpm(value)
+      {
+        document.getElementById('PRM_value').value = value;
+
+          $.ajax({
+          url: "/experiments/send_to_rasp",
+          type: "POST",
+          data: {
+                   prm: document.getElementById('PRM_value').value },
+          success: function(resp){ }
+         });
+      }
+
+      function change_value (value)
+      {
+        document.getElementById('PRM_value').value = value;
+      }
+
  $(document).ready(function(){
 
     // cells = table.getElementsByTagName('td');
@@ -216,35 +256,36 @@ function sortFunction(a, b) {
 
      
     var coil ;
-    var clbkprm = document.querySelector('.js-PRM');
-    var initClbk = new Powerange(clbkprm, { callback: displayPRM, start: 0 ,min: 0, max: 400 });
+    // var clbkprm = document.querySelector('.js-PRM');
+    // var initClbk = new Powerange(clbkprm, { callback: displayPRM, start: 0 ,min: 0, max: 400 });
    
-    function displayPRM() {
+    // function displayPRM() {
          
-          document.getElementById('PRM_value').value = clbkprm.value;
+    //       document.getElementById('PRM_value').value = clbkprm.value;
 
-          // if (clbkprm.value == 0)
-          // {
-       
-          if($("input[type='radio'].radioBtnClass").is(':checked')) {
-           coil = $("input[type='radio'].radioBtnClass:checked").val();
+    //       if($("input[type='radio'].radioBtnClass").is(':checked')) {
+    //        coil = $("input[type='radio'].radioBtnClass:checked").val();
           
-          }
+    //       }
 
-          $.ajax({
-          url: "/experiments/send_to_rasp",
-          type: "POST",
-          data: {
-                   coil: coil, 
-                   prm: document.getElementById('PRM_value').value },
-          success: function(resp){ }
-});
-         // }
-        }
+    //       $.ajax({
+    //       url: "/experiments/send_to_rasp",
+    //       type: "POST",
+    //       data: {
+    //                prm: document.getElementById('PRM_value').value },
+    //       success: function(resp){ }
+    //      });
+    //             }
+       //  $('.js-PRM').on('mousedown', function(){
+       //      alert("aa");
+       //  });
 
-
+       // $('input[class=js-PRM]').mouseup(function() {
         
-      
+
+       // });
+       
+
 
         // function sendMessage()
         // {
@@ -264,25 +305,52 @@ function sortFunction(a, b) {
 
        
     
-        $('#Measure').click(function(){
-           var coil ; 
+//         $('#Measure').click(function(){
+//            var coil ; 
+//           if($("input[type='radio'].radioBtnClass").is(':checked')) {
+//            coil = $("input[type='radio'].radioBtnClass:checked").val();
+//           }
+
+//           $.ajax({
+//           url: "/experiments/send_to_rasp",
+//           type: "POST",
+//           data: {
+//                    coil: coil, 
+//                    prm: document.getElementById('PRM_value').value },
+//           success: function(resp){ }
+// });
+//         })
+
+        $("#bootstrap-rpm").slider();
+      $("#bootstrap-slider-t1").on("slide", function(slideEvt) {
+      
+     $("#sliderValue").text(slideEvt.value);
+    });
+   
+    $('.slider').on("click", function() {
+      var newvalue = $('.tooltip-inner').text();
+     $("#sliderValue").text(newvalue);
+
+     document.getElementById('PRM_value').value = $('.tooltip-inner').text();
+
           if($("input[type='radio'].radioBtnClass").is(':checked')) {
            coil = $("input[type='radio'].radioBtnClass:checked").val();
+          
           }
 
           $.ajax({
           url: "/experiments/send_to_rasp",
           type: "POST",
           data: {
-                   coil: coil, 
                    prm: document.getElementById('PRM_value').value },
           success: function(resp){ }
-});
-        })
+         });
+   });
 
      $('#coil2table').hide();
      $('#coil3table').hide();
-    
+     $('#exportcoil2').hide();
+     $('#exportcoil3').hide();
 
         var iframe = document.createElement('iframe');
         iframe.frameBorder=0;

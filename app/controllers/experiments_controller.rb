@@ -49,13 +49,14 @@ require 'socket'
     @sock = TCPSocket.new('41.41.206.79', 51717)
     # puts params[:coil]
     # puts params[:prm]
-
-    coil = params[:coil].to_i
-    prm = params[:prm].to_i
-    
-     @sock.write [0 , 0 , coil].pack('C*')
-     @sock.write [01 , prm >> 8 , prm].pack('C*')
-      
+    unless params[:coil].nil?
+      coil = params[:coil].to_i
+      @sock.write [0 , 0 , coil].pack('C*')
+    end
+    unless params[:prm].nil?
+      prm = params[:prm].to_i
+      @sock.write [01 , prm >> 8 , prm].pack('C*')
+    end   
      @sock.close
     render json: {done: ""} ,status: 200 
   end

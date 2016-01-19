@@ -7,6 +7,9 @@ class CoursesController < ApplicationController
     @courses = Course.all
   end
 
+  def download
+    send_file '/assets/abc.pdf', :type=>"application/pdf", :x_sendfile=>true
+  end
   # GET /courses/1
   # GET /courses/1.json
   def show

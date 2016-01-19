@@ -3,6 +3,7 @@
 
 <head>
 <script type="text/javascript" src="/assets/powerange.js"></script>
+<script type="text/javascript" src="/assets/slider.js"></script>
   <%= javascript_include_tag 'oscillating' %>
   
 </head>
@@ -21,7 +22,7 @@
               <div class="col-md-6">
               <div class="form-group">
                 <fieldset id="coil">
-                      <h5>Please select a coil:</h5>
+                      <label>Select one coil:</label>
                       <div class="radio">
                       <input type="radio" class="radioBtnClass" name="coil" id="coil1" onclick="handleClick(this);" value="0"checked="true"/><label for="1500"> Coil(1): 800 turns</label>
                      </div>
@@ -37,17 +38,42 @@
               </div>
             
             <div class="row"> 
-              <div class="col-md-3">
-                   <label>Selected PRM:</label>
+              <div class="col-md-4">
+                   <label>Select motor RPM:</label>
               </div>
               <div class="col-md-3">
                  <input type="text"  id="PRM_value"  name="Real_PRM" class="form-control" disabled="disabled">
               </div>
-             </div>
+             </div> <br>
 
-                  <div class="slider-wrapper">
+                  <!-- <div class="slider-wrapper">
                     <input type="text" class="js-PRM" />
                   </div>
+ -->
+                <!-- <input type="range" id="myrange" name="points" min="0" max="400"> -->
+                
+                 <div class="row">
+                  <div class="col-md-1">
+                  <span id="valBox">Min</span>
+                  </div>
+                  <div class="col-md-6">
+                 <div class="form-group">
+                 <input type="range" min="0" max="400" step="1" 
+                 oninput="change_value(this.value)" onchange="sendrpm(this.value)">
+               </div>
+               </div>
+                
+               </div>
+
+             <!--  <div class="button-slider" style="margin-bottom: 3%;">
+                    <div class="btn-group">
+                          <div class="btn btn-info">RPM</div>
+                          <div class="btn btn-default">
+                          <input id="bootstrap-rpm" type="text" value="3" data-slider-min="0" data-slider-max="400" data-slider-step="1" data-slider-value="3"/>
+                          <div class="valueLabel">T1 is<span id="sliderValue">3</span></div>
+                    </div>
+                </div>
+            </div> -->
               
               <div class="row">
                   <div class="col-md-6">
@@ -99,6 +125,9 @@
                               
                             </tbody>
                         </table>
+                        <div class="form-group">
+                         <button type="button" id="exportcoil1" onclick="tableToExcel('coil1table')" class="btn btn-info" >Export</button>
+                        </div>
                         <table class="table table-striped table-bordered table-hover" id="coil2table" >
                         <caption> Coil(2) </caption>
                             <thead>
@@ -112,6 +141,9 @@
                               
                             </tbody>
                         </table>
+                        <div class="form-group">
+                         <button type="button" id="exportcoil2" onclick="tableToExcel('coil2table')" class="btn btn-info" >Export</button>
+                        </div>
                         <table class="table table-striped table-bordered table-hover" id="coil3table" >
                         <caption> Coil(3)  </caption>
                             <thead>
@@ -125,6 +157,9 @@
                               
                             </tbody>
                         </table>
+                        <div class="form-group">
+                         <button type="button" id="exportcoil3" onclick="tableToExcel('coil3table')" class="btn btn-info">Export</button>
+                        </div>
                     </div>
                   </div>
                 </div>
